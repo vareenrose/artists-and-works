@@ -1,27 +1,9 @@
-import Avatar from '@mui/material/Avatar';
-import '../App.css';
-import GoogleIcon from '@mui/icons-material/Google';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
+import { Avatar, Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography } from '@mui/material';
+import { Google, Facebook, LockOutlined } from '@mui/icons-material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../images/logo.svg'
 import aw from '../images/aw.svg'
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {`Copyright © Artists & Works ${new Date().getFullYear()}.`}            
-    </Typography>
-  );
-}
+import Copyright from './Copyright';
 
 const theme = createTheme();
 
@@ -78,7 +60,7 @@ export default function SignIn() {
             }}
           >
             <Avatar sx={{ mb: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
+              <LockOutlined />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign In
@@ -115,10 +97,10 @@ export default function SignIn() {
               </Button>
               <hr/>
 
-              <Button variant="outlined" sx={{ mt: 3 }}  startIcon={<GoogleIcon />} >
+              <Button variant="outlined" sx={{ mt: 3 }}  startIcon={<Google />} >
                 Continue With Google
               </Button>
-              <Button variant="outlined" sx={{ mt: 1, mb: 1 }} startIcon={<FacebookIcon />}>
+              <Button variant="outlined" sx={{ mt: 1, mb: 1 }} startIcon={<Facebook />}>
                 Continue With Facebook
               </Button>
               <Grid container>

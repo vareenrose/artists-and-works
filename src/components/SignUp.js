@@ -1,19 +1,10 @@
-import '../App.css';
-import GoogleIcon from '@mui/icons-material/Google';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Google, Facebook, LockOutlined } from '@mui/icons-material';
 import { IconButton, Typography, Grid, Box, Paper, Button, Avatar, Link, TextField, CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../images/logo.svg'
 import aw from '../images/aw.svg'
+import Copyright from './Copyright';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {`Copyright © Artists & Works ${new Date().getFullYear()}.`}            
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
@@ -70,23 +61,23 @@ export default function SignIn() {
             }}
           >
             <Avatar sx={{ mb: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
+              <LockOutlined />
             </Avatar>
             <Typography component="h1" variant="h5">
               Create A New Account
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                <Typography component="h1" variant="h6">
+                <Typography component="h1" variant="subtitle2">
                     Sign up with social
                 </Typography>
                 <IconButton aria-label="google-sign-up" size="large">
-                    <GoogleIcon />
+                    <Google />
                 </IconButton>
                 <IconButton aria-label="facebook-sign-up" size="large">
-                    <FacebookIcon />
+                    <Facebook />
                 </IconButton>
               <hr/>
-              <Typography component="h6" variant="h6" sx={{ mb: 2 }}>
+              <Typography component="h6" variant="subtitle2" sx={{ mb: 2 }}>
                     Sign up with email
                 </Typography>
               <Grid container spacing={2}>
