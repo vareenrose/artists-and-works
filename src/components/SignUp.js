@@ -4,12 +4,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../images/logo.svg'
 import aw from '../images/aw.svg'
 import Copyright from './Copyright';
-
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 export default function SignIn() {
+  let navigate = useNavigate();
   const handleSubmit = (event) => {
+    navigate("/")
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -145,7 +147,7 @@ export default function SignIn() {
               
               
             <Grid item sx={{ textAlign: 'right' }}>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                 {"Already have an account? Sign In"}
                 </Link>
             </Grid>

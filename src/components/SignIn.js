@@ -4,12 +4,20 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../images/logo.svg'
 import aw from '../images/aw.svg'
 import Copyright from './Copyright';
+import { useNavigate } from "react-router-dom";
+
+
 
 const theme = createTheme();
 
+
+
+
 export default function SignIn() {
+  let navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
+    navigate("/")
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
@@ -91,7 +99,7 @@ export default function SignIn() {
                 type="submit"
                 size='medium'                
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2 }}                
               >
                 Sign In
               </Button>
