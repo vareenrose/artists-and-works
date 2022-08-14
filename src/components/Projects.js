@@ -8,14 +8,15 @@ export default function Projects() {
   return (
     <Grid container spacing={2} sx={{ width: '100%', mt: 3 , justifyContent: 'center'}}>
         {itemData ? itemData.map((item, index) => (                
-        <Grid item component={Paper} elevation={0} sx={{ backgroundColor: 'transprent' }}>
-            <CardActionArea sx={{ height: '30vh', objectFit: 'cover' }}>        
+        <Grid item component={Paper} elevation={0} sx={{ backgroundColor: 'transparent' }}>
+            <CardActionArea >        
                     <img key={index}
                         src={`${item.img}?w=350&fit=crop&auto=format`}
                         srcSet={`${item.img}?w=350&fit=crop&auto=format&dpr=2 2x`}
                         alt={item.title}
                         loading="lazy"
-                        sx={{ borderRadius: '50px' }}
+                        style={{ width: '20vw', height: '25vh',  borderRadius: '20px', objectFit: 'cover'}}
+                        
                     />
             </CardActionArea>
             <ImageListItemBar
