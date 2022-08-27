@@ -25,6 +25,7 @@ import SendIcon from "@mui/icons-material/Send";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import Edit from "@mui/icons-material/Edit"
 
 const Profile = () => {
   const theme = createTheme();
@@ -94,69 +95,21 @@ const Profile = () => {
             />
 
             <Typography component="h1" variant="h5">
-              John Doe
+              Thomas Mwaniki
             </Typography>
             <Box sx={{ mt: 1 }}>
               <Typography component="h1" variant="subtitle2">
-                Title
+                Top Artist
               </Typography>
               <Typography component="h3" variant="subtitle2">
-                Company
-              </Typography>
-              <Typography component="h3" variant="subtitle2">
-                http://www.myexamplesite.com
-              </Typography>
+                Natulenge Juu!
+              </Typography>             
               <Typography component="h3" variant="subtitle2">
                 <RoomIcon />
                 Nairobi, Kenya
               </Typography>
 
-              <hr />
-              <Button
-                variant="contained"
-                fullWidth
-                startIcon={<ControlPointIcon />}
-                sx={{ m: 1 }}
-              >
-                Follow
-              </Button>
-              <Button
-                variant="contained"
-                fullWidth
-                startIcon={<SendIcon />}
-                sx={{ m: 1 }}
-              >
-                Message
-              </Button>
-
-              <Typography component="h3" sx={{ fontWeight: "bold" }}>
-                Find Me On The Web
-              </Typography>
-              <Button
-                variant="outlined"
-                fullWidth
-                startIcon={<TwitterIcon />}
-                sx={{ m: 1 }}
-              >
-                Twitter
-              </Button>
-              <Button
-                variant="outlined"
-                fullWidth
-                startIcon={<LinkedInIcon />}
-                sx={{ m: 1 }}
-              >
-                LinkedIn
-              </Button>
-              <Button
-                variant="outlined"
-                fullWidth
-                startIcon={<FacebookOutlinedIcon />}
-                sx={{ m: 1 }}
-              >
-                Facebook
-              </Button>
-
+              <hr />   
               <Typography component="h3" sx={{ fontWeight: "bold" }}>
                 Top Tools
               </Typography>
@@ -169,6 +122,19 @@ const Profile = () => {
               <Typography component="h3" variant="subtitle2">
                 Dreamweaver
               </Typography>
+
+              <hr />   
+              
+              <Button
+                variant="contained"
+                fullWidth
+                startIcon={<Edit />}
+                sx={{ m: 1 }}
+              >
+                Edit Profile
+              </Button>            
+
+             
             </Box>
           </Box>
         </Grid>
