@@ -49,8 +49,7 @@ const Profile = () => {
       <Grid
         container
         component="main"
-        sx={{
-          height: "100vh",
+        sx={{          
           padding: "10vh",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
@@ -186,21 +185,7 @@ const Profile = () => {
             justifyContent: "center",
           }}
         >
-           <Projects />          
-           {/* <Tabs
-              value={value}
-              onChange={handleChange}
-              textColor="secondary"
-              indicatorColor="secondary"
-              aria-label="secondary tabs example"
-            >
-              <Tab value="one" href="/profile" label="Profile" />
-              <Tab value="two" href="/create" label="Post Content" />
-              <TabPanel value="one" >
-                  <Projects/>
-              </TabPanel>
-            </Tabs> */}
-    
+           <Projects />                  
         </Grid>
       </Grid>
     </ThemeProvider>
