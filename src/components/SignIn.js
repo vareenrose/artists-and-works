@@ -57,7 +57,7 @@ export default function SignIn() {
                 <img src={aw} alt='text'/>
             </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} md={3} component={Paper} elevation={6} square sx={{ height: '70vh', mt: '15vh', mb: '15vh', borderRadius: '10px'  }}>
+        <Grid item xs={12} sm={6} md={3} component={Paper} elevation={6} square sx={{ height: '80vh', mt: '15vh', mb: '15vh', borderRadius: '10px'  }}>
           <Box
             sx={{
               my: 8,
