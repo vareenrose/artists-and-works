@@ -43,6 +43,7 @@ export default function NavBar() {
             >
               <Tab value="one" href="/profile" label="Profile" />
               <Tab value="two" href="/create" label="Post Content" />
+              <Tab value="three" href="/carousel" label="Carousel" />
             </Tabs>
           </Grid>
         </Grid>

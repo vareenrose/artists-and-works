@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Profile from './components/Profile';
 import NavBar from './components/NavBar';
 import PostImage from './components/PostImage';
+import Carousel from "./components/Carousel";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='signup' element={<SignUp />} />
           <Route path='profile' element={<Profile />} />
           <Route path='create' element={<PostImage />} />
+          <Route path='carousel' element={<Carousel />} />
         </Routes>
       </BrowserRouter>
     </div>
