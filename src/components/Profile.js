@@ -1,31 +1,19 @@
 import React from "react";
 import {
-  IconButton,
   Typography,
   Grid,
   Box,
   Paper,
   Button,
   Avatar,
-  Link,
-  TextField,
   CssBaseline,
-  Tab,
-  Tabs
+  Modal,
+  TextField
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Projects from "./Projects";
-
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RoomIcon from "@mui/icons-material/Room";
-import SendIcon from "@mui/icons-material/Send";
-import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import Edit from "@mui/icons-material/Edit"
+import Edit from "@mui/icons-material/Edit";
 
 const Profile = () => {
   const theme = createTheme();
@@ -36,6 +24,10 @@ const Profile = () => {
     setValue(newValue);
   };
 
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -45,12 +37,24 @@ const Profile = () => {
     });
   };
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Grid
         container
         component="main"
-        sx={{          
+        sx={{
           padding: "10vh",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
@@ -103,13 +107,13 @@ const Profile = () => {
               </Typography>
               <Typography component="h3" variant="subtitle2">
                 Natulenge Juu!
-              </Typography>             
+              </Typography>
               <Typography component="h3" variant="subtitle2">
                 <RoomIcon />
                 Nairobi, Kenya
               </Typography>
 
-              <hr />   
+              <hr />
               <Typography component="h3" sx={{ fontWeight: "bold" }}>
                 Top Tools
               </Typography>
@@ -123,18 +127,31 @@ const Profile = () => {
                 Dreamweaver
               </Typography>
 
-              <hr />   
-              
+              <hr />
+
               <Button
                 variant="contained"
                 fullWidth
                 startIcon={<Edit />}
                 sx={{ m: 1 }}
+                onClick={handleOpenModal}
               >
                 Edit Profile
-              </Button>            
+              </Button>
 
-             
+              <Modal
+                open={openModal}
+                onClose={handleCloseModal}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                <TextField id="outlined-basic" label="Name" variant="outlined" />
+                <TextField id="outlined-basic" label="Occupation" variant="outlined" />
+                <TextField id="outlined-basic" label="location" variant="outlined" />
+                <TextField id="outlined-basic" label="Tools" variant="outlined" />
+                </Box>
+              </Modal>
             </Box>
           </Box>
         </Grid>
@@ -151,7 +168,7 @@ const Profile = () => {
             justifyContent: "center",
           }}
         >
-           <Projects />                  
+          <Projects />
         </Grid>
       </Grid>
     </ThemeProvider>
