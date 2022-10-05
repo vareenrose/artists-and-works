@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Tabs, Tab, Box, Grid, Button } from "@mui/material";
-import logo from "../images/logo.svg";
+import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
+import "./Navbar.css";
 
 export default function NavBar() {
   let navigate = useNavigate();
@@ -20,34 +21,27 @@ export default function NavBar() {
 
   return (
     <Box sx={{ width: "100%", m: 1 }}>
+      <Menu>
+        <a id="home" className="menu-item" href="/">
+          Home
+        </a>
+        <a id="about" className="menu-item" href="/about">
+          About
+        </a>
+        <a id="contact" className="menu-item" href="/contact">
+          Contact
+        </a>
+        <a className="menu-item--small" href="">
+          Settings
+        </a>
+      </Menu>
       <Grid
         container
         spacing={2}
         sx={{ display: "flex", flexWrap: "nowrap", alignItems: "center" }}
       >
         <Grid container item spacing={2}>
-          <Grid item sx={{}}>
-            <Menu>
-              <a id="home" className="menu-item" href="/">
-                Home
-              </a>
-              <a id="about" className="menu-item" href="/about">
-                About
-              </a>
-              <a id="contact" className="menu-item" href="/contact">
-                Contact
-              </a>
-              <a className="menu-item--small" href="">
-                Settings
-              </a>
-            </Menu>
-            <img
-              src={logo}
-              alt="logo"
-              onClick={handleLogoNav}
-              style={{ height: "80%", width: "80%" }}
-            />
-          </Grid>
+          <Grid style={{ height: "80%", width: "80%" }} xs={2} item />
           <Grid item>
             <Tabs
               value={value}
