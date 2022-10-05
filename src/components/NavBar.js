@@ -3,6 +3,7 @@ import { Tabs, Tab, Box, Grid, Button } from "@mui/material";
 import logo from "../images/logo.svg";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { slide as Menu } from "react-burger-menu";
 
 export default function NavBar() {
   let navigate = useNavigate();
@@ -26,6 +27,20 @@ export default function NavBar() {
       >
         <Grid container item spacing={2}>
           <Grid item sx={{}}>
+            <Menu>
+              <a id="home" className="menu-item" href="/">
+                Home
+              </a>
+              <a id="about" className="menu-item" href="/about">
+                About
+              </a>
+              <a id="contact" className="menu-item" href="/contact">
+                Contact
+              </a>
+              <a className="menu-item--small" href="">
+                Settings
+              </a>
+            </Menu>
             <img
               src={logo}
               alt="logo"
