@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper";
+import { Autoplay, Pagination, Navigation } from "swiper";
 import { ImageData } from "../helpers/ImageData";
 import {
   Card,
@@ -15,12 +15,24 @@ import {
   Paper,
 } from "@mui/material";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
+import Projects from "./Projects";
 
 export default function Carousel() {
   return (
-    <Swiper navigation={true} modules={[Navigation]} className="mySwiper">      
-        {ImageData.map((item, index) => (
-          <SwiperSlide>
+    <div>
+    <Swiper
+      navigation={true}
+      spaceBetween={30}
+      centeredSlides={true}
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: true,
+      }}
+      modules={[Navigation, Autoplay, Pagination]}
+      className="mySwiper"
+    >
+      {ImageData.map((item, index) => (
+        <SwiperSlide>
           <Grid
             item
             component={Paper}
@@ -35,9 +47,9 @@ export default function Carousel() {
                 alt={item.title}
                 loading="lazy"
                 style={{
-                  width: "20vw",
-                  height: "25vh",
-                  borderRadius: "20px",
+                  width: "45vw",
+                  height: "40vh",
+                  borderRadius: "10px",
                   objectFit: "cover",
                 }}
               />
@@ -49,19 +61,12 @@ export default function Carousel() {
               sx={{ textAlign: "left", paddingLeft: "5px" }}
             />
           </Grid>
-          </SwiperSlide>
-        ))}
-      
-
-      {/*     
-    <SwiperSlide>Slide 2</SwiperSlide>
-    <SwiperSlide>Slide 3</SwiperSlide>
-    <SwiperSlide>Slide 4</SwiperSlide>
-    <SwiperSlide>Slide 5</SwiperSlide>
-    <SwiperSlide>Slide 6</SwiperSlide>
-    <SwiperSlide>Slide 7</SwiperSlide>
-    <SwiperSlide>Slide 8</SwiperSlide>
-    <SwiperSlide>Slide 9</SwiperSlide> */}
+        </SwiperSlide>
+      ))}    
+    
     </Swiper>
+      <Projects/>
+    </div>
+    
   );
 }
