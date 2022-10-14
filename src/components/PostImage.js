@@ -7,26 +7,30 @@ const PostImage = () => {
     post_form: {
       name: "",
       entry_type_id: 1,
-      user_file: "",
     },
   });
 
+  const [user_file, set_user_file] = useState({});
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(post_form);
+    console.log(post_form, user_file);
+
+    let form_data = new FormData();
+    form_data.append("name", post_form.name);
+    form_data.append("entry_type_id", 1);
+    form_data.append("user_file", user_file);
+
+    console.log(form_data);
 
     fetch("https://cool-artists.herokuapp.com/api/add_image", {
       method: "POST",
       mode: "cors",
       headers: {
-        "Content-Type": "image/png",
         "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify({
-        name: post_form.name,
-        entry_type_id: 1,
-        user_file: post_form.user_file,
-      }),
+
+      body: form_data,
     })
       .then((response) => response.json())
       .then((data) => {
@@ -43,6 +47,10 @@ const PostImage = () => {
       ...values,
       [name]: value,
     }));
+  };
+
+  const handleFilechange = (e) => {
+    set_user_file(e.target.files[0]);
   };
 
   return (
@@ -73,7 +81,7 @@ const PostImage = () => {
           <input
             type="file"
             name="user_file"
-            onChange={handleFormChange}
+            onChange={handleFilechange}
             hidden
           />
         </Button>
