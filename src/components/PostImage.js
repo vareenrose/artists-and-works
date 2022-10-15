@@ -1,16 +1,19 @@
 import { Button, Paper, TextField } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { useState } from "react";
+import { Alert } from "@mui/material";
 
 const PostImage = () => {
   const [post_form, set_post_form] = useState({
     post_form: {
       name: "",
       entry_type_id: 1,
+      description: "",
     },
   });
 
   const [user_file, set_user_file] = useState({});
+  const [alert_upload_success, set_alert_upload_success] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,9 +22,10 @@ const PostImage = () => {
     let form_data = new FormData();
     form_data.append("name", post_form.name);
     form_data.append("entry_type_id", 1);
+    form_data.append("description", post_form.description);
     form_data.append("user_file", user_file);
 
-    console.log(form_data);
+    // console.log(form_data);
 
     fetch("https://cool-artists.herokuapp.com/api/add_image", {
       method: "POST",
@@ -34,6 +38,16 @@ const PostImage = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        if (data.status === "ok") {
+          set_alert_upload_success(true);
+          set_post_form({
+            post_form: {
+              name: "",
+              entry_type_id: 1,
+            },
+          });
+          set_user_file({});
+        }
         console.log(data);
       })
       .catch((error) => {
@@ -56,11 +70,16 @@ const PostImage = () => {
   return (
     <Paper elevation={6} sx={{ m: 10, p: 10 }}>
       <form onSubmit={handleSubmit}>
+        {alert_upload_success && (
+          <Alert severity="success">File Uploaded successfuly</Alert>
+        )}
+
         <TextField
           margin="normal"
           required
           fullWidth
           label="Title"
+          value={post_form.name}
           name="name"
           onChange={handleFormChange}
         />
@@ -68,6 +87,7 @@ const PostImage = () => {
           margin="normal"
           required
           fullWidth
+          value={post_form.description}
           label="Description"
           name="description"
           onChange={handleFormChange}
@@ -78,12 +98,7 @@ const PostImage = () => {
           startIcon={<AddPhotoAlternateIcon />}
         >
           Upload File
-          <input
-            type="file"
-            name="user_file"
-            onChange={handleFilechange}
-            hidden
-          />
+          <input type="file" name="user_file" onChange={handleFilechange} />
         </Button>
         <Button
           type="submit"
