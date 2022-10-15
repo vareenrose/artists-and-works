@@ -12,17 +12,27 @@ const PostImage = () => {
     },
   });
 
-  const [user_file, set_user_file] = useState({});
+  const [user_file, set_user_file] = useState("");
   const [alert_upload_success, set_alert_upload_success] = useState(false);
+  const [name, set_name] = useState("");
+  const [description, set_description] = useState("");
+
+  const handleNameChange = (e) => {
+    set_name(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    set_description(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(post_form, user_file);
 
     let form_data = new FormData();
-    form_data.append("name", post_form.name);
+    form_data.append("name", name);
     form_data.append("entry_type_id", 1);
-    form_data.append("description", post_form.description);
+    form_data.append("description", description);
     form_data.append("user_file", user_file);
 
     // console.log(form_data);
@@ -40,13 +50,10 @@ const PostImage = () => {
       .then((data) => {
         if (data.status === "ok") {
           set_alert_upload_success(true);
-          set_post_form({
-            post_form: {
-              name: "",
-              entry_type_id: 1,
-            },
-          });
-          set_user_file({});
+          set_name("");
+          set_description("");
+
+          set_user_file("");
         }
         console.log(data);
       })
@@ -78,19 +85,19 @@ const PostImage = () => {
           margin="normal"
           required
           fullWidth
-          label="Title"
-          value={post_form.name}
+          label="Entry Title"
+          value={name}
           name="name"
-          onChange={handleFormChange}
+          onChange={handleNameChange}
         />
         <TextField
           margin="normal"
           required
           fullWidth
-          value={post_form.description}
+          value={description}
           label="Description"
           name="description"
-          onChange={handleFormChange}
+          onChange={handleDescriptionChange}
         />
         <Button
           variant="contained"
