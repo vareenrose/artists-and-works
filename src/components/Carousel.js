@@ -15,7 +15,7 @@ import {
   Paper,
 } from "@mui/material";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import Projects from "./Projects";
+import NavBar from "./Navbar/NavBar";
 
 export default function Carousel() {
   const [public_images, set_public_images] = useState([]);
@@ -37,6 +37,7 @@ export default function Carousel() {
   }, []);
   return (
     <div>
+      <NavBar />
       <Swiper
         navigation={true}
         spaceBetween={30}

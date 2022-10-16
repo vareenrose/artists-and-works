@@ -2,6 +2,7 @@ import { Button, Paper, TextField } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { useState } from "react";
 import { Alert } from "@mui/material";
+import NavBar from "./Navbar/NavBar";
 
 const PostImage = () => {
   const [post_form, set_post_form] = useState({
@@ -75,50 +76,53 @@ const PostImage = () => {
   };
 
   return (
-    <Paper elevation={6} sx={{ m: 10, p: 10 }}>
-      <form onSubmit={handleSubmit}>
-        {alert_upload_success && (
-          <Alert severity="success">File Uploaded successfuly</Alert>
-        )}
+    <div>
+      <NavBar />
+      <Paper elevation={6} sx={{ m: 10, p: 10 }}>
+        <form onSubmit={handleSubmit}>
+          {alert_upload_success && (
+            <Alert severity="success">File Uploaded successfuly</Alert>
+          )}
 
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          label="Entry Title"
-          value={name}
-          name="name"
-          onChange={handleNameChange}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          value={description}
-          label="Description"
-          name="description"
-          onChange={handleDescriptionChange}
-        />
-        <Button
-          variant="contained"
-          component="label"
-          startIcon={<AddPhotoAlternateIcon />}
-        >
-          Upload File
-          <input type="file" name="user_file" onChange={handleFilechange} />
-        </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="secondary"
-          fullWidth
-          sx={{ m: 2 }}
-          onClick={handleSubmit}
-        >
-          Submit Post
-        </Button>
-      </form>
-    </Paper>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Entry Title"
+            value={name}
+            name="name"
+            onChange={handleNameChange}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            value={description}
+            label="Description"
+            name="description"
+            onChange={handleDescriptionChange}
+          />
+          <Button
+            variant="contained"
+            component="label"
+            startIcon={<AddPhotoAlternateIcon />}
+          >
+            Upload File
+            <input type="file" name="user_file" onChange={handleFilechange} />
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            fullWidth
+            sx={{ m: 2 }}
+            onClick={handleSubmit}
+          >
+            Submit Post
+          </Button>
+        </form>
+      </Paper>
+    </div>
   );
 };
 

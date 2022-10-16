@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import {
   Card,
@@ -10,7 +8,7 @@ import {
   CircularProgress,
   Paper,
 } from "@mui/material";
-import { ImageData } from "../helpers/ImageData";
+import NavBar from "./Navbar/NavBar";
 
 export default function Projects() {
   const [public_images, set_public_images] = useState([]);
@@ -32,6 +30,7 @@ export default function Projects() {
   }, []);
   return (
     <div>
+      <NavBar />
       <Grid
         container
         spacing={2}
