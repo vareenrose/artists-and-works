@@ -63,14 +63,6 @@ const PostImage = () => {
       });
   };
 
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    set_post_form((values) => ({
-      ...values,
-      [name]: value,
-    }));
-  };
-
   const handleFilechange = (e) => {
     set_user_file(e.target.files[0]);
   };

@@ -5,15 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import { ImageData } from "../helpers/ImageData";
-import {
-  Card,
-  CardActions,
-  Grid,
-  CardActionArea,
-  CircularProgress,
-  Paper,
-} from "@mui/material";
+import { Grid, CardActionArea, Paper } from "@mui/material";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import NavBar from "./Navbar/NavBar";
 
