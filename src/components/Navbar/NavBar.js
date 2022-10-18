@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Tabs, Tab, Box, Grid, Button } from "@mui/material";
-import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
@@ -11,6 +10,7 @@ export default function NavBar() {
   const [value, setValue] = useState("one");
 
   const handleChange = (event, newValue) => {
+    event.preventdefault();
     setValue(newValue);
   };
 
@@ -22,17 +22,17 @@ export default function NavBar() {
   return (
     <Box sx={{ width: "100%", m: 1 }}>
       <Menu>
-        <a id="home" className="menu-item" href="/">
+        <a className="menu-item--small" href="/">
           Home
         </a>
-        <a id="about" className="menu-item" href="/about">
-          About
+        <a id="home" className="menu-item" href="/profile">
+          Profile
         </a>
-        <a id="contact" className="menu-item" href="/contact">
-          Contact
+        <a id="about" className="menu-item" href="/create">
+          Post Content
         </a>
-        <a className="menu-item--small" href="">
-          Settings
+        <a id="contact" className="menu-item" href="/carousel">
+          carousel
         </a>
       </Menu>
       <Grid
@@ -40,22 +40,6 @@ export default function NavBar() {
         spacing={2}
         sx={{ display: "flex", flexWrap: "nowrap", alignItems: "center" }}
       >
-        <Grid container item spacing={2}>
-          <Grid style={{ height: "80%", width: "80%" }} xs={2} item />
-          <Grid item>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              textColor="secondary"
-              indicatorColor="secondary"
-              aria-label="secondary tabs example"
-            >
-              <Tab value="one" href="/profile" label="Profile" />
-              <Tab value="two" href="/create" label="Post Content" />
-              <Tab value="three" href="/carousel" label="Carousel" />
-            </Tabs>
-          </Grid>
-        </Grid>
         <Grid
           container
           item

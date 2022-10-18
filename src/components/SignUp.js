@@ -32,6 +32,9 @@ export default function SignIn() {
     form_data.append("password", "password");
     form_data.append("confirm_password", "password");
 
+    localStorage.setItem(form_data, "user_data");
+    navigate("/");
+
     fetch("https://cool-artists.herokuapp.com/api/register", {
       method: "POST",
       mode: "cors",
@@ -44,7 +47,8 @@ export default function SignIn() {
       .then((data) => {
         console.log(data);
         if (data) {
-          navigate("/login");
+          localStorage.setItem(form_data, "user_data");
+          navigate("/");
         }
       })
       .catch((error) => {
