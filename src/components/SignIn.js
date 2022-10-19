@@ -9,6 +9,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 import { Google, Facebook, LockOutlined } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import logo from "../images/logo.svg";
@@ -44,25 +45,25 @@ export default function SignIn() {
     // });
 
     localStorage.setItem("user_data", JSON.stringify(sign_in_form));
-    fetch("https://cool-artists.herokuapp.com/api/login", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: form_data,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data) {
-          localStorage.setItem(form_data, "user_data");
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    // fetch("https://cool-artists.herokuapp.com/api/login", {
+    //   method: "POST",
+    //   mode: "cors",
+    //   headers: {
+    //     "Access-Control-Allow-Origin": "*",
+    //   },
+    //   body: form_data,
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data) {
+    //       localStorage.setItem(form_data, "user_data");
+    //       navigate("/");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
   };
 
   return (
