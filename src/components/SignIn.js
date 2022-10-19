@@ -20,14 +20,49 @@ const theme = createTheme();
 
 export default function SignIn() {
   let navigate = useNavigate();
+
+  const [sign_in_form, set_sign_in_form] = useState({
+    password: "",
+    email: "",
+  });
+
+  const handle_Sign_in_form_change = (e) => {
+    const { name, value } = e.target;
+    set_sign_in_form((values) => ({
+      ...values,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     navigate("/");
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
+
+    localStorage.setItem("user_data", JSON.stringify(sign_in_form));
+    fetch("https://cool-artists.herokuapp.com/api/login", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: form_data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          localStorage.setItem(form_data, "user_data");
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -108,7 +143,9 @@ export default function SignIn() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={sign_in_form.email}
                 autoFocus
+                onChange={handle_Sign_in_form_change}
               />
               <TextField
                 margin="normal"
@@ -118,7 +155,9 @@ export default function SignIn() {
                 label="Password"
                 type="password"
                 id="password"
+                value={sign_in_form.password}
                 autoComplete="current-password"
+                onChange={handle_Sign_in_form_change}
               />
 
               <Button
@@ -126,6 +165,7 @@ export default function SignIn() {
                 size="medium"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
               >
                 Sign In
               </Button>
