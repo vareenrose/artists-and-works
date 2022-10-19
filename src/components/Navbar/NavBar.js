@@ -19,6 +19,11 @@ export default function NavBar() {
     navigate("/");
   };
 
+  const login_state = localStorage.getItem("user_data");
+
+  let login_data = JSON.parse(login_state);
+  let username = login_data.name;
+
   return (
     <Box sx={{ width: "100%", m: 1 }}>
       <Menu>
@@ -46,32 +51,53 @@ export default function NavBar() {
           spacing={2}
           sx={{ display: "flex", justifyContent: "flex-end" }}
         >
-          <Grid item mx={1}>
-            <Link to="login" style={{ textDecoration: "none" }}>
-              <Button
-                variant="outlined"
-                size="medium"
-                sx={{
-                  borderRadius: "50px",
-                  color: "black",
-                  borderColor: "black",
-                }}
-              >
-                Log In
-              </Button>
-            </Link>
-          </Grid>
-          <Grid item mx={1}>
-            <Link to="signup" style={{ textDecoration: "none" }}>
-              <Button
-                variant="contained"
-                size="medium"
-                sx={{ borderRadius: "50px", backgroundColor: "black" }}
-              >
-                Sign Up
-              </Button>
-            </Link>
-          </Grid>
+          {!login_state && (
+            <>
+              <Grid item mx={1}>
+                <Link to="login" style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="outlined"
+                    size="medium"
+                    sx={{
+                      borderRadius: "50px",
+                      color: "black",
+                      borderColor: "black",
+                    }}
+                  >
+                    Log In
+                  </Button>
+                </Link>
+              </Grid>
+              <Grid item mx={1}>
+                <Link to="signup" style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="contained"
+                    size="medium"
+                    sx={{ borderRadius: "50px", backgroundColor: "black" }}
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
+              </Grid>
+            </>
+          )}
+          {login_state && (
+            <Grid item mx={1}>
+              <Link to="login" style={{ textDecoration: "none" }}>
+                <Button
+                  variant="outlined"
+                  size="medium"
+                  sx={{
+                    borderRadius: "50px",
+                    color: "black",
+                    borderColor: "black",
+                  }}
+                >
+                  ({username}) Log Out
+                </Button>
+              </Link>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Box>

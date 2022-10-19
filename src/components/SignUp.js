@@ -20,19 +20,33 @@ import { useState } from "react";
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignUp() {
   let navigate = useNavigate();
+
+  const [sign_up_form, set_sign_up_form] = useState({
+    name: "",
+    password: "",
+    email: "",
+  });
+
+  const handle_Sign_up_form_change = (e) => {
+    const { name, value } = e.target;
+    set_sign_up_form((values) => ({
+      ...values,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    console.log(sign_up_form);
     let form_data = new FormData();
     form_data.append("name", "name");
     form_data.append("email", "email");
     form_data.append("password", "password");
     form_data.append("confirm_password", "password");
 
-    localStorage.setItem(form_data, "user_data");
+    localStorage.setItem("user_data", JSON.stringify(sign_up_form));
     navigate("/");
 
     fetch("https://cool-artists.herokuapp.com/api/register", {
@@ -133,6 +147,8 @@ export default function SignIn() {
                 id="name"
                 label="Username"
                 name="name"
+                value={sign_up_form.name}
+                onChange={handle_Sign_up_form_change}
                 autoComplete="name"
                 autoFocus
               />
@@ -145,6 +161,8 @@ export default function SignIn() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={sign_up_form.email}
+                onChange={handle_Sign_up_form_change}
                 autoFocus
               />
               <TextField
@@ -155,6 +173,8 @@ export default function SignIn() {
                 label="Password"
                 type="password"
                 id="password"
+                value={sign_up_form.password}
+                onChange={handle_Sign_up_form_change}
                 autoComplete="current-password"
               />
               <TextField
