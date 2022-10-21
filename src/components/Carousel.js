@@ -66,7 +66,7 @@ export default function Carousel() {
               </CardActionArea>
               <ImageListItemBar
                 title={item.title}
-                subtitle={item.author}
+                subtitle={item.description}
                 position="below"
                 sx={{ textAlign: "left", paddingLeft: "5px" }}
               />
