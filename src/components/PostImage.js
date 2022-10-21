@@ -1,8 +1,16 @@
-import { Button, Paper, TextField } from "@mui/material";
+import {
+  Button,
+  Paper,
+  TextField,
+  MenuItem,
+  Alert,
+  FormLabel,
+} from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { useState } from "react";
-import { Alert } from "@mui/material";
+import React from "react";
 import NavBar from "./Navbar/NavBar";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const PostImage = () => {
   const [post_form, set_post_form] = useState({
@@ -12,6 +20,11 @@ const PostImage = () => {
       description: "",
     },
   });
+  const [age, setAge] = React.useState("");
+
+  const handleChange = (SelectChangeEvent) => {
+    setAge(SelectChangeEvent.target.value);
+  };
 
   const [user_file, set_user_file] = useState("");
   const [alert_upload_success, set_alert_upload_success] = useState(false);
@@ -70,12 +83,16 @@ const PostImage = () => {
   return (
     <div>
       <NavBar />
-      <Paper elevation={6} sx={{ m: 10, p: 10 }}>
+      <Paper elevation={4} sx={{ m: 15, p: 10 }}>
         <form onSubmit={handleSubmit}>
           {alert_upload_success && (
             <Alert severity="success">File Uploaded successfuly</Alert>
           )}
 
+          <FormLabel>
+            {" "}
+            <b>Name of Entry</b>
+          </FormLabel>
           <TextField
             margin="normal"
             required
@@ -83,8 +100,34 @@ const PostImage = () => {
             label="Entry Title"
             value={name}
             name="name"
+            sx={{ marginBottom: "20px" }}
             onChange={handleNameChange}
           />
+
+          <FormLabel>
+            {" "}
+            <b>Entry Type</b>{" "}
+          </FormLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            label="Entry Type"
+            placeholder="Select Entry Type"
+            sx={{ marginBottom: "20px" }}
+            fullWidth
+            onChange={handleChange}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+
+          <FormLabel>
+            <b>Entry Text Or Description</b>{" "}
+          </FormLabel>
           <TextField
             margin="normal"
             required
@@ -92,6 +135,7 @@ const PostImage = () => {
             value={description}
             label="Description"
             name="description"
+            sx={{ marginBottom: "20px" }}
             onChange={handleDescriptionChange}
           />
           <Button
