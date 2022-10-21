@@ -22,7 +22,7 @@ export default function NavBar() {
   const login_state = localStorage.getItem("user_data");
 
   let login_data = JSON.parse(login_state);
-  let username = login_data.name;
+  let username = login_data && login_data.name;
 
   return (
     <Box sx={{ width: "100%", m: 1 }}>
