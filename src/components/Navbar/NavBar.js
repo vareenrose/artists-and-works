@@ -14,9 +14,8 @@ export default function NavBar() {
     setValue(newValue);
   };
 
-  const handleLogoNav = () => {
-    console.log("logo navigated");
-    navigate("/");
+  const handleLogoutNav = () => {
+    navigate("/login");
   };
 
   const login_state = localStorage.getItem("user_data");
@@ -83,19 +82,18 @@ export default function NavBar() {
           )}
           {login_state && (
             <Grid item mx={1}>
-              <Link to="login" style={{ textDecoration: "none" }}>
-                <Button
-                  variant="outlined"
-                  size="medium"
-                  sx={{
-                    borderRadius: "50px",
-                    color: "black",
-                    borderColor: "black",
-                  }}
-                >
-                  ({username}) Log Out
-                </Button>
-              </Link>
+              <Button
+                variant="outlined"
+                size="medium"
+                onClick={handleLogoutNav}
+                sx={{
+                  borderRadius: "50px",
+                  color: "black",
+                  borderColor: "black",
+                }}
+              >
+                ({username}) Log Out
+              </Button>
             </Grid>
           )}
         </Grid>
