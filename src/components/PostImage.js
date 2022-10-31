@@ -10,6 +10,7 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { useState } from "react";
 import React from "react";
 import NavBar from "./Navbar/NavBar";
+import ArtistsPost from "./ArtistsPost";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const PostImage = () => {
@@ -20,10 +21,11 @@ const PostImage = () => {
       description: "",
     },
   });
-  const [age, setAge] = React.useState("");
+  const [form_type, set_form_type] = React.useState("");
 
-  const handleChange = (SelectChangeEvent) => {
-    setAge(SelectChangeEvent.target.value);
+  const handleChange = (e) => {
+    set_form_type(e.target.value);
+    console.log(e.target.value);
   };
 
   const [user_file, set_user_file] = useState("");
@@ -84,76 +86,74 @@ const PostImage = () => {
     <div>
       <NavBar />
       <Paper elevation={4} sx={{ m: 15, p: 10 }}>
-        <form onSubmit={handleSubmit}>
-          {alert_upload_success && (
-            <Alert severity="success">File Uploaded successfuly</Alert>
-          )}
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          label="Entry Type"
+          placeholder="Select Entry Type"
+          sx={{ marginBottom: "20px" }}
+          fullWidth
+          onChange={handleChange}
+        >
+          <MenuItem value={"artists"}>Artists</MenuItem>
+          <MenuItem value={"art-works"}>Art Works</MenuItem>
+          <MenuItem value={"spaces"}>Spaces</MenuItem>
+        </Select>
+        {form_type === "artists" && <ArtistsPost />}
 
-          <FormLabel>
-            {" "}
-            <b>Name of Entry</b>
-          </FormLabel>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            label="Entry Title"
-            value={name}
-            name="name"
-            sx={{ marginBottom: "20px" }}
-            onChange={handleNameChange}
-          />
+        {form_type === "art-works" && (
+          <form onSubmit={handleSubmit}>
+            <h3 className="text-center">Artists</h3>
+            <hr />
+            {alert_upload_success && (
+              <Alert severity="success">File Uploaded successfuly</Alert>
+            )}
 
-          <FormLabel>
-            {" "}
-            <b>Entry Type</b>{" "}
-          </FormLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            id="demo-simple-select-helper"
-            label="Entry Type"
-            placeholder="Select Entry Type"
-            sx={{ marginBottom: "20px" }}
-            fullWidth
-            onChange={handleChange}
-          >
-            <MenuItem value={10}>Artists</MenuItem>
-            <MenuItem value={20}>Art Works</MenuItem>
-            <MenuItem value={30}>Spaces</MenuItem>
-          </Select>
+            <FormLabel>
+              {" "}
+              <b>Name of Entry</b>
+            </FormLabel>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="Entry Title"
+              value={name}
+              name="name"
+              sx={{ marginBottom: "20px" }}
+              onChange={handleNameChange}
+            />
 
-          <FormLabel>
-            <b>Entry Text Or Description</b>{" "}
-          </FormLabel>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            value={description}
-            label="Description"
-            name="description"
-            sx={{ marginBottom: "20px" }}
-            onChange={handleDescriptionChange}
-          />
-          <Button
-            variant="contained"
-            component="label"
-            startIcon={<AddPhotoAlternateIcon />}
-          >
-            Upload File
-            <input type="file" name="user_file" onChange={handleFilechange} />
-          </Button>
-          <Button
-            type="submit"
-            variant="contained"
-            color="secondary"
-            fullWidth
-            sx={{ m: 2 }}
-            onClick={handleSubmit}
-          >
-            Submit Post
-          </Button>
-        </form>
+            <FormLabel>
+              {" "}
+              <b>Entry Type</b>{" "}
+            </FormLabel>
+
+            <FormLabel>
+              <b>Entry Text Or Description</b>{" "}
+            </FormLabel>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              value={description}
+              label="Description"
+              name="description"
+              sx={{ marginBottom: "20px" }}
+              onChange={handleDescriptionChange}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="secondary"
+              fullWidth
+              sx={{ m: 2 }}
+              onClick={handleSubmit}
+            >
+              Submit Post
+            </Button>
+          </form>
+        )}
       </Paper>
     </div>
   );
