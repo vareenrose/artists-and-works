@@ -8,11 +8,10 @@ import {
   Alert,
   FormLabel,
 } from "@mui/material";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
-export default function ArtistsPost() {
-  const [artists_form, set_post_form] = useState({
-    artists_form: {
+export default function ArtWorksProvenance() {
+  const [provenance_form, set_post_form] = useState({
+    provenance_form: {
       name: "",
       yob: "",
       nationality: "",
@@ -56,7 +55,7 @@ export default function ArtistsPost() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(artists_form, user_file);
+    console.log(provenance_form, user_file);
 
     let form_data = new FormData();
     form_data.append("name", name);
@@ -93,7 +92,7 @@ export default function ArtistsPost() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3 className="text-center">Artists Form</h3>
+      <h3 className="text-center">Artists Provenance</h3>
       <hr />
       {alert_upload_success && (
         <Alert severity="success">File Uploaded successfuly</Alert>
@@ -101,145 +100,100 @@ export default function ArtistsPost() {
 
       <FormLabel>
         {" "}
-        <b>Name</b>
+        <b>Collection Title</b>
       </FormLabel>
       <input
         type="text"
-        name="name"
-        value={artists_form.name}
+        name="collection_title"
+        value={provenance_form.collection_title}
         onChange={handle_form_change}
         className="form-control mb-2"
       />
 
       <div>
         <FormLabel>
-          <b>Year of Birth(required)</b>{" "}
+          <b>Year of Collected</b>{" "}
         </FormLabel>
         <input
           type="date"
-          name="yob"
-          value={artists_form.yob}
+          name="year_collected"
+          value={provenance_form.year_collected}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Nationality(required)</b>{" "}
+          <b>Region Domiciled</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="nationality"
-          value={artists_form.nationality}
+          name="region_domiciled"
+          value={provenance_form.region_domiciled}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Biography</b>{" "}
+          <b>Dealing Institution/Practitioner</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="biography"
-          value={artists_form.biography}
+          name="dealing_institution"
+          value={provenance_form.dealing_institution}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Workstatement</b>{" "}
+          <b>Researched By</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="work_statement"
-          value={artists_form.work_statement}
+          name="researched_by"
+          value={provenance_form.researched_by}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Instagram</b>{" "}
+          <b>Sourced From</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="instagram"
-          value={artists_form.instagram}
+          name="sourced_from"
+          value={provenance_form.sourced_from}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Twitter</b>{" "}
+          <b>Validated At</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="twitter"
-          value={artists_form.twitter}
+          name="validated_at"
+          value={provenance_form.validated_at}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Facebook</b>{" "}
+          <b>Other Provenance</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="facebook"
-          value={artists_form.facebook}
+          name="other_provenance"
+          value={provenance_form.other_provenance}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
-      <div>
-        <FormLabel>
-          <b>Other</b>{" "}
-        </FormLabel>
-        <input
-          type="text"
-          name="other"
-          value={artists_form.other}
-          onChange={handle_form_change}
-          className="form-control mb-2"
-        />
-      </div>
-      <div>
-        <FormLabel>
-          <b>Phone Number</b>{" "}
-        </FormLabel>
-        <input
-          type="number"
-          name="phone_number"
-          value={artists_form.phone_number}
-          onChange={handle_form_change}
-          className="form-control mb-2"
-        />
-      </div>
-      <div>
-        <FormLabel>
-          <b>Email</b>{" "}
-        </FormLabel>
-        <input
-          type="email"
-          name="email"
-          value={artists_form.email}
-          onChange={handle_form_change}
-          className="form-control mb-2"
-        />
-      </div>
-
-      <Button
-        variant="contained"
-        component="label"
-        startIcon={<AddPhotoAlternateIcon />}
-      >
-        Artist Photo
-        <input type="file" name="user_file" onChange={handleFilechange} />
-      </Button>
       <Button
         type="submit"
         variant="contained"

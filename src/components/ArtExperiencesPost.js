@@ -10,20 +10,15 @@ import {
 } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
-export default function ArtistsPost() {
-  const [artists_form, set_post_form] = useState({
-    artists_form: {
-      name: "",
-      yob: "",
-      nationality: "",
-      biography: "",
-      work_statement: "",
-      instagram: "",
-      twitter: "",
-      facebook: "",
-      other: "",
-      phone_number: "",
-      email: "",
+export default function ArtExperiencesPost() {
+  const [experiences_form, set_post_form] = useState({
+    experiences_form: {
+      artist_name: "",
+      award_title: "",
+      award_description: "",
+      awarding_institution: "",
+      award_date: "",
+      award_type: "",
     },
   });
   const [form_type, set_form_type] = React.useState("");
@@ -56,7 +51,7 @@ export default function ArtistsPost() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(artists_form, user_file);
+    console.log(experiences_form, user_file);
 
     let form_data = new FormData();
     form_data.append("name", name);
@@ -93,7 +88,7 @@ export default function ArtistsPost() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3 className="text-center">Artists Form</h3>
+      <h3 className="text-center">Experiences Form</h3>
       <hr />
       {alert_upload_success && (
         <Alert severity="success">File Uploaded successfuly</Alert>
@@ -101,145 +96,89 @@ export default function ArtistsPost() {
 
       <FormLabel>
         {" "}
-        <b>Name</b>
+        <b>Artist Name</b>
       </FormLabel>
       <input
         type="text"
-        name="name"
-        value={artists_form.name}
+        name="artist_name"
+        value={experiences_form.artist_name}
         onChange={handle_form_change}
         className="form-control mb-2"
       />
 
       <div>
         <FormLabel>
-          <b>Year of Birth(required)</b>{" "}
-        </FormLabel>
-        <input
-          type="date"
-          name="yob"
-          value={artists_form.yob}
-          onChange={handle_form_change}
-          className="form-control mb-2"
-        />
-      </div>
-      <div>
-        <FormLabel>
-          <b>Nationality(required)</b>{" "}
+          <b>Award Title</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="nationality"
-          value={artists_form.nationality}
+          name="award_title"
+          value={experiences_form.award_title}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Biography</b>{" "}
+          <b>Award Description</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="biography"
-          value={artists_form.biography}
+          name="award_description"
+          value={experiences_form.award_description}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Workstatement</b>{" "}
+          <b>Awarding Institution</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="work_statement"
-          value={artists_form.work_statement}
+          name="awarding_institution"
+          value={experiences_form.awarding_institution}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Instagram</b>{" "}
+          <b>Location(City/Country)</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="instagram"
-          value={artists_form.instagram}
+          name="location"
+          value={experiences_form.location}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Twitter</b>{" "}
+          <b>Award Date</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="twitter"
-          value={artists_form.twitter}
+          name="award_date"
+          value={experiences_form.award_date}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
       <div>
         <FormLabel>
-          <b>Facebook</b>{" "}
+          <b>Award Type</b>{" "}
         </FormLabel>
         <input
           type="text"
-          name="facebook"
-          value={artists_form.facebook}
-          onChange={handle_form_change}
-          className="form-control mb-2"
-        />
-      </div>
-      <div>
-        <FormLabel>
-          <b>Other</b>{" "}
-        </FormLabel>
-        <input
-          type="text"
-          name="other"
-          value={artists_form.other}
-          onChange={handle_form_change}
-          className="form-control mb-2"
-        />
-      </div>
-      <div>
-        <FormLabel>
-          <b>Phone Number</b>{" "}
-        </FormLabel>
-        <input
-          type="number"
-          name="phone_number"
-          value={artists_form.phone_number}
-          onChange={handle_form_change}
-          className="form-control mb-2"
-        />
-      </div>
-      <div>
-        <FormLabel>
-          <b>Email</b>{" "}
-        </FormLabel>
-        <input
-          type="email"
-          name="email"
-          value={artists_form.email}
+          name="award_type"
+          value={experiences_form.award_type}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
       </div>
 
-      <Button
-        variant="contained"
-        component="label"
-        startIcon={<AddPhotoAlternateIcon />}
-      >
-        Artist Photo
-        <input type="file" name="user_file" onChange={handleFilechange} />
-      </Button>
       <Button
         type="submit"
         variant="contained"

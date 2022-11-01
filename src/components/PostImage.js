@@ -11,7 +11,9 @@ import { useState } from "react";
 import React from "react";
 import NavBar from "./Navbar/NavBar";
 import ArtistsPost from "./ArtistsPost";
+import ArtExperiencesPost from "./ArtExperiencesPost";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import ArtWorksProvenance from "./ArtWorksProvenance";
 
 const PostImage = () => {
   const [post_form, set_post_form] = useState({
@@ -96,64 +98,20 @@ const PostImage = () => {
           onChange={handleChange}
         >
           <MenuItem value={"artists"}>Artists</MenuItem>
-          <MenuItem value={"art-works"}>Art Works</MenuItem>
-          <MenuItem value={"spaces"}>Spaces</MenuItem>
+          <MenuItem value={"art_exp"}>
+            Artists experiences/achievements
+          </MenuItem>
+          <MenuItem value={"art_works_prov"}>
+            ArtWorks provenance(collections)
+          </MenuItem>
+          <MenuItem value={"media"}>Media(videos, audio, texts)</MenuItem>
+          <MenuItem value={"atr_works"}>ArtWorks</MenuItem>
         </Select>
         {form_type === "artists" && <ArtistsPost />}
 
-        {form_type === "art-works" && (
-          <form onSubmit={handleSubmit}>
-            <h3 className="text-center">Artists</h3>
-            <hr />
-            {alert_upload_success && (
-              <Alert severity="success">File Uploaded successfuly</Alert>
-            )}
+        {form_type === "art_exp" && <ArtExperiencesPost />}
 
-            <FormLabel>
-              {" "}
-              <b>Name of Entry</b>
-            </FormLabel>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Entry Title"
-              value={name}
-              name="name"
-              sx={{ marginBottom: "20px" }}
-              onChange={handleNameChange}
-            />
-
-            <FormLabel>
-              {" "}
-              <b>Entry Type</b>{" "}
-            </FormLabel>
-
-            <FormLabel>
-              <b>Entry Text Or Description</b>{" "}
-            </FormLabel>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              value={description}
-              label="Description"
-              name="description"
-              sx={{ marginBottom: "20px" }}
-              onChange={handleDescriptionChange}
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              color="secondary"
-              fullWidth
-              sx={{ m: 2 }}
-              onClick={handleSubmit}
-            >
-              Submit Post
-            </Button>
-          </form>
-        )}
+        {form_type === "art_works_prov" && <ArtWorksProvenance />}
       </Paper>
     </div>
   );
