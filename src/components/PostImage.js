@@ -10,10 +10,11 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { useState } from "react";
 import React from "react";
 import NavBar from "./Navbar/NavBar";
-import ArtistsPost from "./ArtistsPost";
-import ArtExperiencesPost from "./ArtExperiencesPost";
+import ArtistsPost from "./PostContent/ArtistsPost";
+import ArtExperiencesPost from "./PostContent/ArtExperiencesPost";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import ArtWorksProvenance from "./ArtWorksProvenance";
+import ArtWorksProvenance from "./PostContent/ArtWorksProvenance";
+import MediaPost from "./PostContent/MediaPost";
 
 const PostImage = () => {
   const [post_form, set_post_form] = useState({
@@ -112,6 +113,8 @@ const PostImage = () => {
         {form_type === "art_exp" && <ArtExperiencesPost />}
 
         {form_type === "art_works_prov" && <ArtWorksProvenance />}
+
+        {form_type === "media" && <MediaPost />}
       </Paper>
     </div>
   );

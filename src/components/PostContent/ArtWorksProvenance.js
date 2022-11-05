@@ -12,17 +12,14 @@ import {
 export default function ArtWorksProvenance() {
   const [provenance_form, set_post_form] = useState({
     provenance_form: {
-      name: "",
-      yob: "",
-      nationality: "",
-      biography: "",
-      work_statement: "",
-      instagram: "",
-      twitter: "",
-      facebook: "",
-      other: "",
-      phone_number: "",
-      email: "",
+      collection_title: "",
+      year_collected: "",
+      region_domiciled: "",
+      dealing_institution: "",
+      researched_by: "",
+      sourced_from: "",
+      validated_at: "",
+      other_provenance: "",
     },
   });
   const [form_type, set_form_type] = React.useState("");
