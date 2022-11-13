@@ -93,7 +93,7 @@ export default function MediaPost() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3 className="text-center">Artists Form</h3>
+      <h3 className="text-center">Media Form</h3>
       <hr />
       {alert_upload_success && (
         <Alert severity="success">File Uploaded successfuly</Alert>

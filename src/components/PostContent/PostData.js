@@ -1,22 +1,21 @@
-import {
-  Button,
-  Paper,
-  TextField,
-  MenuItem,
-  Alert,
-  FormLabel,
-} from "@mui/material";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { Paper, MenuItem } from "@mui/material";
 import { useState } from "react";
 import React from "react";
-import NavBar from "./Navbar/NavBar";
-import ArtistsPost from "./PostContent/ArtistsPost";
-import ArtExperiencesPost from "./PostContent/ArtExperiencesPost";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import ArtWorksProvenance from "./PostContent/ArtWorksProvenance";
-import MediaPost from "./PostContent/MediaPost";
+import NavBar from "../Navbar/NavBar";
+import ArtistsPost from "./ArtistsPost";
+import ArtExperiencesPost from "./ArtExperiencesPost";
+import Select from "@mui/material/Select";
+import ArtWorksProvenance from "./ArtWorksProvenance";
+import MediaPost from "./MediaPost";
+import ArtWorks from "./ArtWorks";
+import { useEffect } from "react";
 
-const PostImage = () => {
+const PostData = () => {
+  useEffect(() => {
+    get_artists_data();
+  }, []);
+
+  const [artists, set_artists] = useState([]);
   const [post_form, set_post_form] = useState({
     post_form: {
       name: "",
@@ -81,6 +80,24 @@ const PostImage = () => {
       });
   };
 
+  const get_artists_data = () => {
+    fetch("https://cool-artists.herokuapp.com/api/get_artists", {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        set_artists(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   const handleFilechange = (e) => {
     set_user_file(e.target.files[0]);
   };
@@ -110,14 +127,18 @@ const PostImage = () => {
         </Select>
         {form_type === "artists" && <ArtistsPost />}
 
-        {form_type === "art_exp" && <ArtExperiencesPost />}
+        {form_type === "art_exp" && <ArtExperiencesPost artists={artists} />}
 
-        {form_type === "art_works_prov" && <ArtWorksProvenance />}
+        {form_type === "art_works_prov" && (
+          <ArtWorksProvenance artists={artists} />
+        )}
 
-        {form_type === "media" && <MediaPost />}
+        {form_type === "media" && <MediaPost artists={artists} />}
+
+        {form_type === "atr_works" && <ArtWorks artists={artists} />}
       </Paper>
     </div>
   );
 };
 
-export default PostImage;
+export default PostData;

@@ -159,6 +159,22 @@ export default function ArtWorks() {
           className="form-control mb-2"
         />
       </div>
+      <Button
+        variant="contained"
+        component="label"
+        startIcon={<AddPhotoAlternateIcon />}
+      >
+        2d Photo
+        <input type="file" name="user_file" onChange={handleFilechange} />
+      </Button>
+      <Button
+        variant="contained"
+        component="label"
+        startIcon={<AddPhotoAlternateIcon />}
+      >
+        3d Photo
+        <input type="file" name="user_file" onChange={handleFilechange} />
+      </Button>
       <div>
         <FormLabel>
           <b>Description</b>{" "}
@@ -195,15 +211,6 @@ export default function ArtWorks() {
           className="form-control mb-2"
         />
       </div>
-
-      <Button
-        variant="contained"
-        component="label"
-        startIcon={<AddPhotoAlternateIcon />}
-      >
-        Artist Photo
-        <input type="file" name="user_file" onChange={handleFilechange} />
-      </Button>
       <Button
         type="submit"
         variant="contained"

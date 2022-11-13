@@ -12,19 +12,17 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 export default function ArtistsPost() {
   const [artists_form, set_post_form] = useState({
-    artists_form: {
-      name: "",
-      yob: "",
-      nationality: "",
-      biography: "",
-      work_statement: "",
-      instagram: "",
-      twitter: "",
-      facebook: "",
-      other: "",
-      phone_number: "",
-      email: "",
-    },
+    name: "",
+    yob: "",
+    nationality: "",
+    biography: "",
+    work_statement: "",
+    instagram: "",
+    twitter: "",
+    facebook: "",
+    other: "",
+    phone_number: "",
+    email: "",
   });
   const [form_type, set_form_type] = React.useState("");
 
@@ -35,8 +33,6 @@ export default function ArtistsPost() {
 
   const [user_file, set_user_file] = useState("");
   const [alert_upload_success, set_alert_upload_success] = useState(false);
-  const [name, set_name] = useState("");
-  const [description, set_description] = useState("");
 
   const handle_form_change = (e) => {
     const { name, value } = e.target;
@@ -46,49 +42,61 @@ export default function ArtistsPost() {
     }));
   };
 
-  const handleDescriptionChange = (e) => {
-    set_description(e.target.value);
-  };
-
   const handleFilechange = (e) => {
     set_user_file(e.target.files[0]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(artists_form, user_file);
-
     let form_data = new FormData();
-    form_data.append("name", name);
-    form_data.append("entry_type_id", 1);
-    form_data.append("description", description);
-    form_data.append("user_file", user_file);
+    form_data.append("name", artists_form.name);
+    form_data.append("yob", artists_form.yob);
+    form_data.append("nationality", artists_form.nationality);
+    form_data.append("biography", artists_form.biography);
+    form_data.append("work_statement", artists_form.work_statement);
+    form_data.append("instagram", artists_form.instagram);
+    form_data.append("twitter", artists_form.twitter);
+    form_data.append("facebook", artists_form.facebook);
+    form_data.append("others", artists_form.others);
+    form_data.append("phone_number", artists_form.phone_number);
+    form_data.append("photo_url", user_file);
 
-    // console.log(form_data);
+    console.log(form_data);
+    console.log(artists_form);
 
-    // fetch("https://cool-artists.herokuapp.com/api/add_image", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
+    fetch("https://cool-artists.herokuapp.com/api/create_artist", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
 
-    //   body: form_data,
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     if (data.status === "ok") {
-    //       set_alert_upload_success(true);
-    //       set_name("");
-    //       set_description("");
-
-    //       set_user_file("");
-    //     }
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+      body: form_data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+          set_alert_upload_success(true);
+          set_post_form({
+            name: "",
+            yob: "",
+            nationality: "",
+            biography: "",
+            work_statement: "",
+            instagram: "",
+            twitter: "",
+            facebook: "",
+            other: "",
+            phone_number: "",
+            email: "",
+          });
+          set_user_file("");
+        }
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -96,7 +104,7 @@ export default function ArtistsPost() {
       <h3 className="text-center">Artists Form</h3>
       <hr />
       {alert_upload_success && (
-        <Alert severity="success">File Uploaded successfuly</Alert>
+        <Alert severity="success">Artist Created successfuly</Alert>
       )}
 
       <FormLabel>
@@ -238,7 +246,7 @@ export default function ArtistsPost() {
         startIcon={<AddPhotoAlternateIcon />}
       >
         Artist Photo
-        <input type="file" name="user_file" onChange={handleFilechange} />
+        <input type="file" name="photo_url" onChange={handleFilechange} />
       </Button>
       <Button
         type="submit"
