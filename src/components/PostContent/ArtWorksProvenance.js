@@ -8,32 +8,22 @@ import {
   Alert,
   FormLabel,
 } from "@mui/material";
+import Select from "react-select";
 
-export default function ArtWorksProvenance() {
+export default function ArtWorksProvenance(props) {
+  const [sel_artist, set_sel_artist] = useState("");
   const [provenance_form, set_post_form] = useState({
-    provenance_form: {
-      collection_title: "",
-      year_collected: "",
-      region_domiciled: "",
-      dealing_institution: "",
-      researched_by: "",
-      sourced_from: "",
-      validated_at: "",
-      other_provenance: "",
-    },
+    collection_title: "",
+    year_collected: "",
+    region_domiciled: "",
+    dealing_institution: "",
+    researched_by: "",
+    sourced_from: "",
+    validated_at: "",
+    other_provenance: "",
   });
-  const [form_type, set_form_type] = React.useState("");
 
-  const handleChange = (e) => {
-    set_form_type(e.target.value);
-    console.log(e.target.value);
-  };
-
-  const [user_file, set_user_file] = useState("");
   const [alert_upload_success, set_alert_upload_success] = useState(false);
-  const [name, set_name] = useState("");
-  const [description, set_description] = useState("");
-
   const handle_form_change = (e) => {
     const { name, value } = e.target;
     set_post_form((values) => ({
@@ -42,50 +32,50 @@ export default function ArtWorksProvenance() {
     }));
   };
 
-  const handleDescriptionChange = (e) => {
-    set_description(e.target.value);
-  };
-
-  const handleFilechange = (e) => {
-    set_user_file(e.target.files[0]);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(provenance_form, user_file);
+    console.log(provenance_form);
 
     let form_data = new FormData();
-    form_data.append("name", name);
-    form_data.append("entry_type_id", 1);
-    form_data.append("description", description);
-    form_data.append("user_file", user_file);
+    form_data.append("artists_id", sel_artist);
+    form_data.append("collection_title", provenance_form.collection_title);
+    form_data.append("year_collected", provenance_form.year_collected);
+    form_data.append("region_domiciled", provenance_form.region_domiciled);
+    form_data.append(
+      "dealing_institution",
+      provenance_form.dealing_institution
+    );
+    form_data.append("researched_by", provenance_form.researched_by);
+    form_data.append("sourced_from", provenance_form.sourced_from);
+    form_data.append("validated_at", provenance_form.validated_at);
+    form_data.append("other_provenance", provenance_form.other_provenance);
 
-    // console.log(form_data);
-
-    // fetch("https://cool-artists.herokuapp.com/api/add_image", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-
-    //   body: form_data,
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     if (data.status === "ok") {
-    //       set_alert_upload_success(true);
-    //       set_name("");
-    //       set_description("");
-
-    //       set_user_file("");
-    //     }
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+    console.log(form_data);
+    fetch("https://cool-artists.herokuapp.com/api/create_provenance", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: form_data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        set_alert_upload_success(true);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
+
+  const handle_artist_select = (e) => {
+    set_sel_artist(e.value);
+  };
+
+  const artist_options = props.artists.map((val) => ({
+    label: val.name,
+    value: val.id,
+  }));
 
   return (
     <form onSubmit={handleSubmit}>
@@ -94,6 +84,13 @@ export default function ArtWorksProvenance() {
       {alert_upload_success && (
         <Alert severity="success">File Uploaded successfuly</Alert>
       )}
+
+      <Select
+        options={artist_options}
+        placeholder={"Select an artist"}
+        className="mb-3"
+        onChange={handle_artist_select}
+      />
 
       <FormLabel>
         {" "}
@@ -133,7 +130,7 @@ export default function ArtWorksProvenance() {
       </div>
       <div>
         <FormLabel>
-          <b>Dealing Institution/Practitioner</b>{" "}
+          <b>Dealing Institution/Practitioner(change type to string)</b>{" "}
         </FormLabel>
         <input
           type="text"

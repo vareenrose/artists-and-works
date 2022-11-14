@@ -9,8 +9,9 @@ import {
   FormLabel,
 } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import Select from "react-select";
 
-export default function MediaPost() {
+export default function MediaPost(props) {
   const [media_form, set_post_form] = useState({
     media_form: {
       name: "",
@@ -26,12 +27,11 @@ export default function MediaPost() {
       email: "",
     },
   });
-  const [form_type, set_form_type] = React.useState("");
-
-  const handleChange = (e) => {
-    set_form_type(e.target.value);
-    console.log(e.target.value);
-  };
+  const artist_options = props.artists.map((val) => ({
+    label: val.name,
+    value: val.id,
+  }));
+  const [sel_artist, set_sel_artist] = useState("");
 
   const [user_file, set_user_file] = useState("");
   const [alert_upload_success, set_alert_upload_success] = useState(false);
@@ -91,6 +91,10 @@ export default function MediaPost() {
     //   });
   };
 
+  const handle_artist_select = (e) => {
+    set_sel_artist(e.value);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <h3 className="text-center">Media Form</h3>
@@ -98,6 +102,13 @@ export default function MediaPost() {
       {alert_upload_success && (
         <Alert severity="success">File Uploaded successfuly</Alert>
       )}
+
+      <Select
+        options={artist_options}
+        placeholder={"Select an artist"}
+        className="mb-3"
+        onChange={handle_artist_select}
+      />
 
       <FormLabel>
         {" "}
@@ -116,7 +127,7 @@ export default function MediaPost() {
           <b>Type</b>{" "}
         </FormLabel>
         <input
-          type="date"
+          type="text"
           name="type"
           value={media_form.type}
           onChange={handle_form_change}

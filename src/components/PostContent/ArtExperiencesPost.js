@@ -17,7 +17,6 @@ export default function ArtExperiencesPost(props) {
     label: val.name,
     value: val.id,
   }));
-  const [user_file, set_user_file] = useState("");
   const [alert_upload_success, set_alert_upload_success] = useState(false);
 
   const handle_form_change = (e) => {
@@ -54,6 +53,7 @@ export default function ArtExperiencesPost(props) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        set_alert_upload_success(true);
       })
       .catch((error) => {
         console.error("Error:", error);
