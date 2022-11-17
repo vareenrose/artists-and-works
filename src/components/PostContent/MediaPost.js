@@ -13,30 +13,23 @@ import Select from "react-select";
 
 export default function MediaPost(props) {
   const [media_form, set_post_form] = useState({
-    media_form: {
-      name: "",
-      yob: "",
-      nationality: "",
-      biography: "",
-      work_statement: "",
-      instagram: "",
-      twitter: "",
-      facebook: "",
-      other: "",
-      phone_number: "",
-      email: "",
-    },
+    title: "",
+    type: "",
+    source_link: "",
+    summary: "",
+    description: "",
+    created_by: "",
+    sourced_by: "",
+    sourced_from: "",
+    validated_by: "",
   });
   const artist_options = props.artists.map((val) => ({
     label: val.name,
     value: val.id,
   }));
-  const [sel_artist, set_sel_artist] = useState("");
 
   const [user_file, set_user_file] = useState("");
   const [alert_upload_success, set_alert_upload_success] = useState(false);
-  const [name, set_name] = useState("");
-  const [description, set_description] = useState("");
 
   const handle_form_change = (e) => {
     const { name, value } = e.target;
@@ -46,49 +39,59 @@ export default function MediaPost(props) {
     }));
   };
 
-  const handleDescriptionChange = (e) => {
-    set_description(e.target.value);
-  };
-
   const handleFilechange = (e) => {
     set_user_file(e.target.files[0]);
   };
+  const [sel_artist, set_sel_artist] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(media_form, user_file);
 
     let form_data = new FormData();
-    form_data.append("name", name);
-    form_data.append("entry_type_id", 1);
-    form_data.append("description", description);
-    form_data.append("user_file", user_file);
+    form_data.append("title", media_form.title);
+    form_data.append("artists_id", sel_artist);
+    form_data.append("type", media_form.type);
+    form_data.append("source_link", media_form.source_link);
+    form_data.append("summary", media_form.summary);
+    form_data.append("description", media_form.description);
+    form_data.append("created_by", media_form.created_by);
+    form_data.append("sourced_by", media_form.sourced_by);
+    form_data.append("sourced_from", media_form.sourced_from);
+    form_data.append("validated_by", media_form.validated_by);
+    form_data.append("attachment_url", user_file);
 
-    // console.log(form_data);
+    fetch("https://cool-artists.herokuapp.com/api/create_media", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
 
-    // fetch("https://cool-artists.herokuapp.com/api/add_image", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-
-    //   body: form_data,
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     if (data.status === "ok") {
-    //       set_alert_upload_success(true);
-    //       set_name("");
-    //       set_description("");
-
-    //       set_user_file("");
-    //     }
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+      body: form_data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+          set_alert_upload_success(true);
+          set_user_file("");
+          set_post_form({
+            title: "",
+            type: "",
+            source_link: "",
+            summary: "",
+            description: "",
+            created_by: "",
+            sourced_by: "",
+            sourced_from: "",
+            validated_by: "",
+          });
+        }
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   const handle_artist_select = (e) => {
@@ -100,7 +103,7 @@ export default function MediaPost(props) {
       <h3 className="text-center">Media Form</h3>
       <hr />
       {alert_upload_success && (
-        <Alert severity="success">File Uploaded successfuly</Alert>
+        <Alert severity="success">Media Uploaded successfuly</Alert>
       )}
 
       <Select
@@ -180,7 +183,11 @@ export default function MediaPost(props) {
           startIcon={<AddPhotoAlternateIcon />}
         >
           Attatchment
-          <input type="file" name="attatchment" onChange={handleFilechange} />
+          <input
+            type="file"
+            name="attachment_url"
+            onChange={handleFilechange}
+          />
         </Button>
       </div>
       <div>
@@ -224,7 +231,7 @@ export default function MediaPost(props) {
           <b>Validated By</b>{" "}
         </FormLabel>
         <input
-          type="number"
+          type="text"
           name="validated_by"
           value={media_form.validated_by}
           onChange={handle_form_change}

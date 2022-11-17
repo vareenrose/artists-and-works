@@ -1,34 +1,29 @@
 import React from "react";
 import { useState } from "react";
-import {
-  Button,
-  Paper,
-  TextField,
-  MenuItem,
-  Alert,
-  FormLabel,
-} from "@mui/material";
+import { Button, Alert, FormLabel } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import Select from "react-select";
 
-export default function ArtWorks() {
+export default function ArtWorks(props) {
   const [artists_form, set_post_form] = useState({
-    artists_form: {
-      artist_name: "",
-      title: "",
-      medium: "",
-      series: "",
-      production_year: "",
-      dimensions: "",
-      description: "",
-      source_link: "",
-      sourced_by: "",
-    },
+    artist_name: "",
+    title: "",
+    medium: "",
+    series: "",
+    production_year: "",
+    dimensions: "",
+    description: "",
+    source_link: "",
+    sourced_by: "",
   });
+  const [sel_artist, set_sel_artist] = useState("");
 
-  const [user_file, set_user_file] = useState("");
+  const [first_user_file, first_set_user_file] = useState("");
+  const [second_user_file, second_set_user_file] = useState("");
   const [alert_upload_success, set_alert_upload_success] = useState(false);
-  const [name, set_name] = useState("");
-  const [description, set_description] = useState("");
+  const handle_artist_select = (e) => {
+    set_sel_artist(e.value);
+  };
 
   const handle_form_change = (e) => {
     const { name, value } = e.target;
@@ -37,46 +32,54 @@ export default function ArtWorks() {
       [name]: value,
     }));
   };
+  const artist_options = props.artists.map((val) => ({
+    label: val.name,
+    value: val.id,
+  }));
 
   const handleFilechange = (e) => {
-    set_user_file(e.target.files[0]);
+    first_set_user_file(e.target.files[0]);
+  };
+
+  const handleSecondFilechange = (e) => {
+    second_set_user_file(e.target.files[0]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(artists_form, user_file);
 
     let form_data = new FormData();
-    form_data.append("name", name);
-    form_data.append("entry_type_id", 1);
-    form_data.append("description", description);
-    form_data.append("user_file", user_file);
+    form_data.append("artists_id", sel_artist);
+    form_data.append("title", artists_form.title);
+    form_data.append("medium", artists_form.medium);
+    form_data.append("series", artists_form.series);
+    form_data.append("production_year", artists_form.production_year);
+    form_data.append("dimensions", artists_form.dimensions);
+    form_data.append("description", artists_form.description);
+    form_data.append("source_link", artists_form.source_link);
+    form_data.append("sourced_by", artists_form.sourced_by);
+    form_data.append("2d_photo_url", first_user_file);
+    form_data.append("3d_photo_url", second_user_file);
 
-    // console.log(form_data);
+    fetch("https://cool-artists.herokuapp.com/api/create_art_works", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
 
-    // fetch("https://cool-artists.herokuapp.com/api/add_image", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-
-    //   body: form_data,
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     if (data.status === "ok") {
-    //       set_alert_upload_success(true);
-    //       set_name("");
-    //       set_description("");
-
-    //       set_user_file("");
-    //     }
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+      body: form_data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "ok") {
+          set_alert_upload_success(true);
+        }
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -87,16 +90,11 @@ export default function ArtWorks() {
         <Alert severity="success">File Uploaded successfuly</Alert>
       )}
 
-      <FormLabel>
-        {" "}
-        <b>Artist Name</b>
-      </FormLabel>
-      <input
-        type="text"
-        name="artist_name"
-        value={artists_form.artist_name}
-        onChange={handle_form_change}
-        className="form-control mb-2"
+      <Select
+        options={artist_options}
+        placeholder={"Select an artist"}
+        className="mb-3"
+        onChange={handle_artist_select}
       />
 
       <div>
@@ -140,7 +138,7 @@ export default function ArtWorks() {
           <b>Production Year</b>{" "}
         </FormLabel>
         <input
-          type="text"
+          type="number"
           name="production_year"
           value={artists_form.production_year}
           onChange={handle_form_change}
@@ -165,7 +163,7 @@ export default function ArtWorks() {
         startIcon={<AddPhotoAlternateIcon />}
       >
         2d Photo
-        <input type="file" name="user_file" onChange={handleFilechange} />
+        <input type="file" name="2d_photo_url" onChange={handleFilechange} />
       </Button>
       <Button
         variant="contained"
@@ -173,7 +171,11 @@ export default function ArtWorks() {
         startIcon={<AddPhotoAlternateIcon />}
       >
         3d Photo
-        <input type="file" name="user_file" onChange={handleFilechange} />
+        <input
+          type="file"
+          name="3d_photo_url"
+          onChange={handleSecondFilechange}
+        />
       </Button>
       <div>
         <FormLabel>
