@@ -87,7 +87,7 @@ export default function ArtWorks(props) {
       <h3 className="text-center">Artists Form</h3>
       <hr />
       {alert_upload_success && (
-        <Alert severity="success">File Uploaded successfuly</Alert>
+        <Alert severity="success">ArtWork Uploaded successfuly</Alert>
       )}
 
       <Select

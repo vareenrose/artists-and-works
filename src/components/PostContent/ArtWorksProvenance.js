@@ -62,6 +62,16 @@ export default function ArtWorksProvenance(props) {
       .then((response) => response.json())
       .then((data) => {
         set_alert_upload_success(true);
+        set_post_form({
+          collection_title: "",
+          year_collected: "",
+          region_domiciled: "",
+          dealing_institution: "",
+          researched_by: "",
+          sourced_from: "",
+          validated_at: "",
+          other_provenance: "",
+        });
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -82,7 +92,7 @@ export default function ArtWorksProvenance(props) {
       <h3 className="text-center">Artists Provenance</h3>
       <hr />
       {alert_upload_success && (
-        <Alert severity="success">File Uploaded successfuly</Alert>
+        <Alert severity="success">Provenance Uploaded successfuly</Alert>
       )}
 
       <Select
@@ -106,10 +116,10 @@ export default function ArtWorksProvenance(props) {
 
       <div>
         <FormLabel>
-          <b>Year of Collected</b>{" "}
+          <b>Year of Collection(year)</b>{" "}
         </FormLabel>
         <input
-          type="date"
+          type="number"
           name="year_collected"
           value={provenance_form.year_collected}
           onChange={handle_form_change}

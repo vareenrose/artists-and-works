@@ -8,7 +8,8 @@ export default function ArtExperiencesPost(props) {
     award_title: "",
     award_description: "",
     awarding_institution: "",
-    award_date: "",
+    award_year: "",
+    award_month: "",
     award_type: "",
   });
   const [sel_artist, set_sel_artist] = useState("");
@@ -39,7 +40,8 @@ export default function ArtExperiencesPost(props) {
       experiences_form.awarding_institution
     );
     form_data.append("location", experiences_form.location);
-    form_data.append("award_date", experiences_form.award_date);
+    form_data.append("award_year", experiences_form.award_year);
+    form_data.append("award_month", experiences_form.award_month);
     form_data.append("award_type", experiences_form.award_type);
 
     fetch("https://cool-artists.herokuapp.com/api/create_experience", {
@@ -69,7 +71,7 @@ export default function ArtExperiencesPost(props) {
       <h3 className="text-center">Experiences Form</h3>
       <hr />
       {alert_upload_success && (
-        <Alert severity="success">File Uploaded successfuly</Alert>
+        <Alert severity="success">Experience Captured successfuly</Alert>
       )}
 
       <Select
@@ -129,12 +131,24 @@ export default function ArtExperiencesPost(props) {
       </div>
       <div>
         <FormLabel>
-          <b>Award Date</b>{" "}
+          <b>Award Year</b>{" "}
         </FormLabel>
         <input
-          type="date"
-          name="award_date"
-          value={experiences_form.award_date}
+          type="number"
+          name="award_year"
+          value={experiences_form.award_year}
+          onChange={handle_form_change}
+          className="form-control mb-2"
+        />
+      </div>
+      <div>
+        <FormLabel>
+          <b>Award Month</b>{" "}
+        </FormLabel>
+        <input
+          type="number"
+          name="award_month"
+          value={experiences_form.award_month}
           onChange={handle_form_change}
           className="form-control mb-2"
         />
