@@ -38,6 +38,22 @@ export default function NavBar() {
         <a id="contact" className="menu-item" href="/carousel">
           carousel
         </a>
+        <hr />
+        <a id="artists" className="menu-item" href="/list-artists">
+          Artists
+        </a>
+        <a id="media" className="menu-item" href="/list-media">
+          Media
+        </a>
+        <a id="art_works" className="menu-item" href="/art_works">
+          Art Works
+        </a>
+        <a id="experiences" className="menu-item" href="/list-experiences">
+          Experiences
+        </a>
+        <a id="provenance" className="menu-item" href="/list-provenance">
+          Experiences
+        </a>
       </Menu>
       <Grid
         container

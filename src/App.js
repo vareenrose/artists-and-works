@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import PostData from "./components/PostContent/PostData";
 import Carousel from "./components/Carousel";
+import ArtistsTable from "./components/ListContent/ArtistsTable";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="create" element={<PostData />} />
           <Route path="carousel" element={<Carousel />} />
+          <Route path="list-artists" element={<ArtistsTable />} />
         </Routes>
       </BrowserRouter>
     </div>
