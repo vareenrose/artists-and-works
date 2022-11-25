@@ -52,7 +52,7 @@ export default function NavBar() {
           Experiences
         </a>
         <a id="provenance" className="menu-item" href="/list-provenance">
-          Experiences
+          Provenance
         </a>
       </Menu>
       <Grid

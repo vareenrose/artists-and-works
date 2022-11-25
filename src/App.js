@@ -9,6 +9,8 @@ import Carousel from "./components/Carousel";
 import ArtistsTable from "./components/ListContent/ArtistsTable";
 import MediaTable from "./components/ListContent/MediaTable";
 import ArtWorksTable from "./components/ListContent/ArtWorksTable";
+import ExperienceTable from "./components/ListContent/ExperienceTable";
+import ProvenanceTable from "./components/ListContent/ProvenanceTable";
 
 function App() {
   return (
@@ -23,7 +25,9 @@ function App() {
           <Route path="carousel" element={<Carousel />} />
           <Route path="list-artists" element={<ArtistsTable />} />
           <Route path="list-media" element={<MediaTable />} />
-          <Route path="list-media" element={<ArtWorksTable />} />
+          <Route path="art_works" element={<ArtWorksTable />} />
+          <Route path="list-experiences" element={<ExperienceTable />} />
+          <Route path="list-provenance" element={<ProvenanceTable />} />
         </Routes>
       </BrowserRouter>
     </div>
