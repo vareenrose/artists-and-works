@@ -1,4 +1,4 @@
-import { Google, Facebook, LockOutlined } from "@mui/icons-material";
+import { LockOutlined } from "@mui/icons-material";
 import {
   IconButton,
   Typography,
