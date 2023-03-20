@@ -9,24 +9,26 @@ export default function ArtistsTable() {
     get_airtable_data();
   }, []);
   const [artists, set_artists] = useState([]);
+  const [data, set_data] = useState([]);
 
   const get_airtable_data = () => {
     let base = new Airtable({ apiKey: "keyQUL5nHqE6mive3" }).base(
       "appOIqHFPZdryyOnf"
     );
-    base("institutions, artists & other practitioners biodata")
+    base("Artists & other practitioners biodata")
       .select({
         // Selecting the first 3 records in Grid view:
-        maxRecords: 3,
+        maxRecords: 60,
         view: "Grid view",
       })
       .eachPage(
         function page(records, fetchNextPage) {
           // This function (`page`) will get called for each page of records.
-          console.log("Records ", records);
+          console.log(records[0].fields);
+          set_data(records);
 
           records.forEach(function (record) {
-            // console.log("Retrieved", record);
+            // console.log("Retrieved", record.fields);
           });
 
           // To fetch the next page of records, call `fetchNextPage`.
@@ -73,11 +75,6 @@ export default function ArtistsTable() {
       key: "nationality",
     },
     {
-      title: "biography",
-      dataIndex: "biography",
-      key: "biography",
-    },
-    {
       title: "Biography",
       dataIndex: "biography",
       key: "biography",
@@ -113,12 +110,46 @@ export default function ArtistsTable() {
       key: "yob",
     },
   ];
+
+  // console.log(data)
   return (
     <div>
       <NavBar />
       <div style={{ marginTop: "40px" }}>
         <h4 className="text-center">Artists Data</h4>
-        <Table dataSource={artists} columns={columns} />;
+        <div style={{ margin: "40px" }}>
+          <table className="table table-bordered">
+            <thead className="table-dark">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Nationality</th>
+                <th scope="col">Work Statement</th>
+                <th scope="col">Facebook</th>
+                <th scope="col">Instagram</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Work Statement</th>
+                <th scope="col">Twitter</th>
+                <th scope="col">YOB</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((val, index) => (
+                <tr key={index}>
+                  <td>{val.fields.Name}</td>
+                  <td>{val.fields.Nationality[0]}</td>
+                  <td>{val.fields["Work statement"]}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>{val.fields.YOB}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {/* <Table dataSource={artists} columns={columns} />; */}
       </div>
     </div>
   );
