@@ -123,13 +123,13 @@ export default function ArtistsTable() {
               <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Nationality</th>
+                <th scope="col">YOB</th>
                 <th scope="col">Work Statement</th>
                 <th scope="col">Facebook</th>
                 <th scope="col">Instagram</th>
                 <th scope="col">Phone Number</th>
                 <th scope="col">Work Statement</th>
                 <th scope="col">Twitter</th>
-                <th scope="col">YOB</th>
               </tr>
             </thead>
             <tbody>
@@ -137,13 +137,13 @@ export default function ArtistsTable() {
                 <tr key={index}>
                   <td>{val.fields.Name}</td>
                   <td>{val.fields.Nationality[0]}</td>
+                  <td>{val.fields.YOB}</td>
                   <td>{val.fields["Work statement"]}</td>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td>{val.fields.YOB}</td>
                 </tr>
               ))}
             </tbody>
