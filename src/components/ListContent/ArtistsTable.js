@@ -24,7 +24,6 @@ export default function ArtistsTable() {
       .eachPage(
         function page(records, fetchNextPage) {
           // This function (`page`) will get called for each page of records.
-          console.log(records[36].fields);
           set_data(records);
 
           records.forEach(function (record) {
@@ -135,7 +134,7 @@ export default function ArtistsTable() {
               {data.map((val, index) => (
                 <tr key={index}>
                   <td>{val.fields.Name}</td>
-                  <td>{val.fields.Nationality[0]}</td>
+                  <td>{val.fields && val.fields.Nationality}</td>
                   <td>{val.fields.YOB}</td>
                   <td>{val.fields["Work statement"]}</td>
                   <td>{val.fields.Email}</td>
