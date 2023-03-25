@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../Navbar/NavBar";
 import { Table } from "antd";
 import Airtable from "airtable";
+import ArtistsModal from "./ArtistsModal";
 
 export default function ArtistsTable() {
   useEffect(() => {
-    get_artists_data();
+    // get_artists_data();
     get_airtable_data();
   }, []);
   const [artists, set_artists] = useState([]);
   const [data, set_data] = useState([]);
+  const [artists_modal, set_artists_modal] = useState(false);
+  const [artists_images, set_artists_images] = useState([]);
 
   const get_airtable_data = () => {
     let base = new Airtable({ apiKey: "keyQUL5nHqE6mive3" }).base(
@@ -44,22 +47,27 @@ export default function ArtistsTable() {
       );
   };
 
-  const get_artists_data = () => {
-    fetch("https://cool-artists.herokuapp.com/api/get_artists", {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        set_artists(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  // const get_artists_data = () => {
+  //   fetch("https://cool-artists.herokuapp.com/api/get_artists", {
+  //     method: "GET",
+  //     mode: "cors",
+  //     headers: {
+  //       "Access-Control-Allow-Origin": "*",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       set_artists(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //     });
+  // };
+
+  const show_artists_modal = (artists_images) => {
+    set_artists_modal(!artists_modal);
+    set_artists_images(artists_images);
   };
 
   const columns = [
@@ -132,7 +140,10 @@ export default function ArtistsTable() {
             </thead>
             <tbody>
               {data.map((val, index) => (
-                <tr key={index}>
+                <tr
+                  key={index}
+                  onClick={() => show_artists_modal(val.fields["artist image"])}
+                >
                   <td>{val.fields.Name}</td>
                   <td>{val.fields && val.fields.Nationality}</td>
                   <td>{val.fields.YOB}</td>
@@ -148,6 +159,10 @@ export default function ArtistsTable() {
         </div>
         {/* <Table dataSource={artists} columns={columns} />; */}
       </div>
+      <ArtistsModal
+        artists_modal={artists_modal}
+        artists_images={artists_images}
+      />
     </div>
   );
 }
