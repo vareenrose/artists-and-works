@@ -9,6 +9,7 @@ import {
   Paper,
 } from "@mui/material";
 import NavBar from "./Navbar/NavBar";
+import { ImageData } from "../helpers/ImageData";
 
 export default function Projects() {
   const [public_images, set_public_images] = useState([]);
@@ -36,8 +37,8 @@ export default function Projects() {
         spacing={2}
         sx={{ width: "100%", mt: 3, justifyContent: "center" }}
       >
-        {public_images ? (
-          public_images.map((item, index) => (
+        {ImageData ? (
+          ImageData.map((item, index) => (
             <Grid
               item
               component={Paper}
@@ -47,8 +48,8 @@ export default function Projects() {
               <CardActionArea>
                 <img
                   key={index}
-                  src={`${item.slug}?w=350&fit=crop&auto=format`}
-                  srcSet={`${item.slug}?w=350&fit=crop&auto=format&dpr=2 2x`}
+                  src={`${item.img}?w=350&fit=crop&auto=format`}
+                  srcSet={`${item.img}?w=350&fit=crop&auto=format&dpr=2 2x`}
                   alt={item.name}
                   loading="lazy"
                   style={{

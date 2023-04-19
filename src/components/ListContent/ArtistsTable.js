@@ -3,6 +3,7 @@ import NavBar from "../Navbar/NavBar";
 import { Table } from "antd";
 import Airtable from "airtable";
 import ArtistsModal from "./ArtistsModal";
+import ArtistsBio from "./ArtistsBio";
 
 export default function ArtistsTable() {
   useEffect(() => {
@@ -12,7 +13,7 @@ export default function ArtistsTable() {
   const [artists, set_artists] = useState([]);
   const [data, set_data] = useState([]);
   const [artists_modal, set_artists_modal] = useState(false);
-  const [artists_images, set_artists_images] = useState([]);
+  const [artists_data, set_artists_data] = useState([]);
 
   const get_airtable_data = () => {
     let base = new Airtable({ apiKey: "keyQUL5nHqE6mive3" }).base(
@@ -65,9 +66,13 @@ export default function ArtistsTable() {
   //     });
   // };
 
-  const show_artists_modal = (artists_images) => {
+  const show_artists_modal = (artists_data) => {
     set_artists_modal(!artists_modal);
-    set_artists_images(artists_images);
+    set_artists_data(artists_data);
+  };
+
+  const handle_modal_close = () => {
+    set_artists_modal(false);
   };
 
   const columns = [
@@ -122,47 +127,46 @@ export default function ArtistsTable() {
   return (
     <div>
       <NavBar />
-      <div style={{ marginTop: "40px" }}>
-        <h4 className="text-center">Artists Data</h4>
-        <div style={{ margin: "40px" }}>
-          <table className="table table-bordered">
-            <thead className="table-dark">
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Nationality</th>
-                <th scope="col">YOB</th>
-                <th scope="col">Work Statement</th>
-                <th scope="col">Email</th>
-                <th scope="col">Other website? (URL)</th>
-                <th scope="col">Phone Number</th>
-                <th scope="col">Twitter</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((val, index) => (
-                <tr
-                  key={index}
-                  onClick={() => show_artists_modal(val.fields["artist image"])}
-                >
-                  <td>{val.fields.Name}</td>
-                  <td>{val.fields && val.fields.Nationality}</td>
-                  <td>{val.fields.YOB}</td>
-                  <td>{val.fields["Work statement"]}</td>
-                  <td>{val.fields.Email}</td>
-                  <td>{val.fields["Other website? (URL)"]}</td>
-                  <td>{val.fields["Number (include country code)"]}</td>
-                  <td></td>
+      {!artists_modal && (
+        <div style={{ marginTop: "40px" }}>
+          <h4 className="text-center">Artists Data</h4>
+          <div style={{ margin: "40px" }}>
+            <table className="table table-bordered">
+              <thead className="table-dark">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Nationality</th>
+                  <th scope="col">YOB</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {data.map((val, index) => (
+                  <tr
+                    key={index}
+                    onClick={() => show_artists_modal(val.fields)}
+                  >
+                    <td>{val.fields.Name}</td>
+                    <td>{val.fields && val.fields.Nationality}</td>
+                    <td>{val.fields.YOB}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {/* <Table dataSource={artists} columns={columns} />; */}
         </div>
-        {/* <Table dataSource={artists} columns={columns} />; */}
-      </div>
-      <ArtistsModal
+      )}
+      {artists_modal && (
+        <ArtistsBio
+          artists_modal={artists_modal}
+          artists_data={artists_data}
+          handle_modal_close={handle_modal_close}
+        />
+      )}
+      {/* <ArtistsModal
         artists_modal={artists_modal}
         artists_images={artists_images}
-      />
+      /> */}
     </div>
   );
 }
