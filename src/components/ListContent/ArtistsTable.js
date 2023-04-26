@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../Navbar/NavBar";
-import { Table } from "antd";
 import Airtable from "airtable";
 import ArtistsModal from "./ArtistsModal";
 import ArtistsBio from "./ArtistsBio";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import {
+  Card,
+  CardActions,
+  Grid,
+  CardActionArea,
+  CircularProgress,
+  Paper,
+} from "@mui/material";
+import { ImageData } from "../../helpers/ImageData";
 
 export default function ArtistsTable() {
   useEffect(() => {
@@ -75,57 +84,86 @@ export default function ArtistsTable() {
     set_artists_modal(false);
   };
 
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Nationality",
-      dataIndex: "nationality",
-      key: "nationality",
-    },
-    {
-      title: "Biography",
-      dataIndex: "biography",
-      key: "biography",
-    },
-    {
-      title: "Facebook",
-      dataIndex: "facebook",
-      key: "facebook",
-    },
-    {
-      title: "Instagram",
-      dataIndex: "instagram",
-      key: "instagram",
-    },
-    {
-      title: "Phone Number",
-      dataIndex: "phone_number",
-      key: "phone_number",
-    },
-    {
-      title: "Work Statement",
-      dataIndex: "work_statement",
-      key: "work_statement",
-    },
-    {
-      title: "Twitter",
-      dataIndex: "twitter",
-      key: "twitter",
-    },
-    {
-      title: "YOB",
-      dataIndex: "yob",
-      key: "yob",
-    },
-  ];
-
-  // console.log(data)
+  console.log(data);
   return (
     <div>
+      <NavBar />
+
+      <Grid
+        container
+        spacing={2}
+        sx={{ width: "100%", mt: 3, justifyContent: "center" }}
+      >
+        {data ? (
+          data.map((item, index) =>
+            item.fields["artist image"] ? (
+              <Grid
+                key={index}
+                item
+                component={Paper}
+                elevation={0}
+                sx={{ backgroundColor: "transparent" }}
+              >
+                <CardActionArea>
+                  <img
+                    key={index}
+                    src={`${item.fields["artist image"][0].url}?w=350&fit=crop&auto=format`}
+                    srcSet={`${item.fields["artist image"][0].url}?w=350&fit=crop&auto=format&dpr=2 2x`}
+                    alt={item.fields.name}
+                    loading="lazy"
+                    style={{
+                      width: "20vw",
+                      height: "25vh",
+                      borderRadius: "20px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </CardActionArea>
+                <ImageListItemBar
+                  title={item.fields.name}
+                  // subtitle={item.description}
+                  position="below"
+                  sx={{ textAlign: "left", paddingLeft: "5px" }}
+                />
+              </Grid>
+            ) : (
+              <Grid
+                key={index}
+                item
+                component={Paper}
+                elevation={0}
+                sx={{ backgroundColor: "transparent" }}
+              >
+                <CardActionArea>
+                  <img
+                    key={index}
+                    src={`https://placehold.co/600x400/000000/FFF?text=${item.fields.Name}`}
+                    srcSet={`https://placehold.co/600x400/000000/FFF?text=${item.fields.Name}?w=350&fit=crop&auto=format&dpr=2 2x`}
+                    // alt={item.name}
+                    loading="lazy"
+                    style={{
+                      width: "20vw",
+                      height: "25vh",
+                      borderRadius: "20px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </CardActionArea>
+                {/* <ImageListItemBar
+                title={item.name}
+                subtitle={item.description}
+                position="below"
+                sx={{ textAlign: "left", paddingLeft: "5px" }}
+              /> */}
+              </Grid>
+            )
+          )
+        ) : (
+          <CircularProgress color="secondary" />
+        )}
+      </Grid>
+
+      {/* <div>
       <NavBar />
       {!artists_modal && (
         <div style={{ marginTop: "40px" }}>
@@ -152,10 +190,12 @@ export default function ArtistsTable() {
                 ))}
               </tbody>
             </table>
-          </div>
-          {/* <Table dataSource={artists} columns={columns} />; */}
+          </div>          
         </div>
       )}
+
+      </div> */}
+
       {artists_modal && (
         <ArtistsBio
           artists_modal={artists_modal}

@@ -55,7 +55,7 @@ export default function NavBar() {
           Provenance
         </a>
       </Menu>
-      <Grid
+      {/* <Grid
         container
         spacing={2}
         sx={{ display: "flex", flexWrap: "nowrap", alignItems: "center" }}
@@ -113,7 +113,7 @@ export default function NavBar() {
             </Grid>
           )}
         </Grid>
-      </Grid>
+      </Grid> */}
     </Box>
   );
 }
