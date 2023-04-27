@@ -55,7 +55,8 @@ export default function NavBar() {
           Provenance
         </a>
       </Menu>
-      {/* <Grid
+
+      <Grid
         container
         spacing={2}
         sx={{ display: "flex", flexWrap: "nowrap", alignItems: "center" }}
@@ -66,54 +67,59 @@ export default function NavBar() {
           spacing={2}
           sx={{ display: "flex", justifyContent: "flex-end" }}
         >
-          {!login_state && (
-            <>
-              <Grid item mx={1}>
-                <Link to="login" style={{ textDecoration: "none" }}>
-                  <Button
-                    variant="outlined"
-                    size="medium"
-                    sx={{
-                      borderRadius: "50px",
-                      color: "black",
-                      borderColor: "black",
-                    }}
-                  >
-                    Log In
-                  </Button>
-                </Link>
-              </Grid>
-              <Grid item mx={1}>
-                <Link to="signup" style={{ textDecoration: "none" }}>
-                  <Button
-                    variant="contained"
-                    size="medium"
-                    sx={{ borderRadius: "50px", backgroundColor: "black" }}
-                  >
-                    Sign Up
-                  </Button>
-                </Link>
-              </Grid>
-            </>
-          )}
-          {login_state && (
-            <Grid item mx={1}>
-              <Button
-                variant="outlined"
-                size="medium"
-                onClick={handleLogoutNav}
-                sx={{
-                  borderRadius: "50px",
-                  color: "black",
-                  borderColor: "black",
-                }}
-              >
-                ({username}) Log Out
-              </Button>
-            </Grid>
-          )}
+          <Grid item mx={1}>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container-fluid">
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarNav"
+                  aria-controls="navbarNav"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarNav">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#">
+                        OVERVIEW
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        WORKS
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        MEDIA
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        PROVENANCE
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        EXPERIENCES
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        ARTWORKS
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </Grid>
         </Grid>
-      </Grid> */}
+      </Grid>
     </Box>
   );
 }
