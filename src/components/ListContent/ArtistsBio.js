@@ -28,20 +28,22 @@ export default function ArtistsBio(props) {
     <div>
       {!show_details && (
         <div
-          style={{ marginLeft: "100px", marginTop: "30px" }}
+          style={{ marginLeft: "100px", marginTop: "50px" }}
           className="artists-bio-container"
         >
           <div className="row">
-            <h2 onClick={props.handle_modal_close}>
-              {props.artists_data.Name}
-            </h2>
-            <div className="col">
-              <h4>{props.artists_data.Biography}</h4>
+            <div className="col" style={{ marginTop: "20px" }}>
+              <h2 onClick={props.handle_modal_close}>
+                {props.artists_data.Name}
+              </h2>
+              <div>
+                <h4>{props.artists_data.Biography}</h4>
+              </div>
             </div>
 
             <div className="col">
-              <div>
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div style={{ marginRight: "60px" }}>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light float-end ">
                   <div class="container-fluid">
                     <button
                       class="navbar-toggler"
