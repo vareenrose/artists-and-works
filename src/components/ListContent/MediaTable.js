@@ -90,7 +90,8 @@ export default function MediaTable() {
         >
           {data ? (
             data.map((item, index) =>
-              item.fields["Source link"] ? (
+              item.fields["Source link"] &&
+              item.fields["Media type"] === "Video" ? (
                 <Grid
                   key={index}
                   item
@@ -133,8 +134,8 @@ export default function MediaTable() {
                     <img
                       onClick={() => show_artists_modal(item.fields)}
                       key={index}
-                      src={`https://placehold.co/600x400/000000/FFF?text=${item.fields.Name}`}
-                      srcSet={`https://placehold.co/600x400/000000/FFF?text=${item.fields.Name}?w=350&fit=crop&auto=format&dpr=2 2x`}
+                      src={`https://placehold.co/600x400/000000/FFF?text=${item.fields["Source link"]}`}
+                      srcSet={`https://placehold.co/600x400/000000/FFF?text=${item.fields["Source link"]}?w=350&fit=crop&auto=format&dpr=2 2x`}
                       // alt={item.name}
                       loading="lazy"
                       style={{
