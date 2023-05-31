@@ -20,10 +20,10 @@ export default function MediaTable() {
     let base = new Airtable({ apiKey: "keyQUL5nHqE6mive3" }).base(
       "appOIqHFPZdryyOnf"
     );
-    base("Media")
+    base("Media (artist & artworks)")
       .select({
         // Selecting the first 3 records in Grid view:
-        maxRecords: 60,
+        maxRecords: 100,
         view: "Grid view",
       })
       .eachPage(

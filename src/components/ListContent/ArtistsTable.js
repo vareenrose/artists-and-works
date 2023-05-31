@@ -19,10 +19,10 @@ export default function ArtistsTable() {
     let base = new Airtable({ apiKey: "keyQUL5nHqE6mive3" }).base(
       "appOIqHFPZdryyOnf"
     );
-    base("Artists & other practitioners biodata")
+    base("Biodata (artists & other practitioners)")
       .select({
         // Selecting the first 3 records in Grid view:
-        maxRecords: 60,
+        maxRecords: 100,
         view: "Grid view",
       })
       .eachPage(
