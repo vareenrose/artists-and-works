@@ -101,6 +101,7 @@ export default function MediaTable() {
                 >
                   <CardActionArea>
                     <ReactPlayer
+                      playsinline={false}
                       onClick={() => show_artists_modal(item.fields)}
                       key={index}
                       url={`${item.fields["Source link"]}?w=350&fit=crop&auto=format`}
