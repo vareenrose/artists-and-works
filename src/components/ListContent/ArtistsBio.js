@@ -62,33 +62,18 @@ export default function ArtistsBio(props) {
                           <a
                             class="nav-link active"
                             aria-current="page"
-                            href="#"
+                            href="/list-artists"
                           >
                             OVERVIEW
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#">
-                            WORKS
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">
+                          <a class="nav-link" href="/list-media">
                             MEDIA
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#">
-                            PROVENANCE
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">
-                            EXPERIENCES
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">
+                          <a class="nav-link" href="/list-art-works">
                             ARTWORKS
                           </a>
                         </li>

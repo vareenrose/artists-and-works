@@ -25,7 +25,7 @@ function App() {
           <Route path="carousel" element={<Carousel />} />
           <Route path="list-artists" element={<ArtistsTable />} />
           <Route path="list-media" element={<MediaTable />} />
-          <Route path="art_works" element={<ArtWorksTable />} />
+          <Route path="list-art-works" element={<ArtWorksTable />} />
           <Route path="list-experiences" element={<ExperienceTable />} />
           <Route path="list-provenance" element={<ProvenanceTable />} />
         </Routes>
