@@ -17,13 +17,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<Home />} /> */}
           <Route path="login" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="profile" element={<Profile />} />
           <Route path="create" element={<PostData />} />
           <Route path="carousel" element={<Carousel />} />
-          <Route path="list-artists" element={<ArtistsTable />} />
+          <Route path="/" element={<ArtistsTable />} />
           <Route path="list-media" element={<MediaTable />} />
           <Route path="list-art-works" element={<ArtWorksTable />} />
           <Route path="list-experiences" element={<ExperienceTable />} />
