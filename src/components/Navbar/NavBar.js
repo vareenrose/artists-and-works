@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tabs, Tab, Box, Grid, Button } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
@@ -25,7 +25,7 @@ export default function NavBar() {
 
   return (
     <Box sx={{ width: "100%", m: 1 }}>
-      <Menu>
+      {/* <Menu>
         <a className="menu-item--small" href="/">
           Home
         </a>
@@ -54,7 +54,7 @@ export default function NavBar() {
         <a id="provenance" className="menu-item" href="/list-provenance">
           Provenance
         </a>
-      </Menu>
+      </Menu> */}
 
       <Grid
         container
