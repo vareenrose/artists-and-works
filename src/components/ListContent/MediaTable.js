@@ -117,8 +117,8 @@ export default function MediaTable() {
                     />
                   </CardActionArea>
                   <ImageListItemBar
-                    title={item.fields["Produced by"]}
-                    // subtitle={item.description}
+                    title={item.fields["Distributed/Produced by"]}
+                    subtitle={item.fields["Name (biodata link)"][0]}
                     position="below"
                     sx={{ textAlign: "left", paddingLeft: "5px" }}
                   />

@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Box, Grid } from "@mui/material";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { slide as Menu } from "react-burger-menu";
 import "./Navbar.css";
 
 export default function NavBar() {
@@ -85,11 +83,7 @@ export default function NavBar() {
                   <div class="collapse navbar-collapse " id="navbarNav">
                     <ul class="navbar-nav">
                       <li class="nav-item">
-                        <a
-                          class="nav-link active"
-                          aria-current="page"
-                          href="/list-artists"
-                        >
+                        <a class="nav-link active" aria-current="page" href="/">
                           ARTISTS
                         </a>
                       </li>
