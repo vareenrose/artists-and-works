@@ -91,7 +91,12 @@ export default function MediaTable() {
           {data ? (
             data.map((item, index) =>
               item.fields["Source link"] &&
-              item.fields["Media type"] === "Video" ? (
+              item.fields["Media type"] === "Video" &&
+              index !== 48 &&
+              index !== 47 &&
+              index !== 46 &&
+              index !== 50 &&
+              index !== 45 ? (
                 <Grid
                   key={index}
                   item
@@ -102,12 +107,9 @@ export default function MediaTable() {
                   <CardActionArea>
                     <ReactPlayer
                       playsinline={false}
-                      onClick={() => show_artists_modal(item.fields)}
                       key={index}
-                      url={`${item.fields["Source link"]}?w=350&fit=crop&auto=format`}
-                      srcSet={`${item.fields["Source link"]}?w=350&fit=crop&auto=format&dpr=2 2x`}
-                      alt={item.fields.name}
-                      loading="lazy"
+                      url={item.fields["Source link"]}
+                      // loading="lazy"
                       style={{
                         width: "20vw",
                         height: "25vh",
@@ -119,6 +121,7 @@ export default function MediaTable() {
                   <ImageListItemBar
                     title={item.fields["Distributed/Produced by"]}
                     subtitle={item.fields["Name (biodata link)"][0]}
+                    // subtitle={item.fields["Source link"]}
                     position="below"
                     sx={{ textAlign: "left", paddingLeft: "5px" }}
                   />
