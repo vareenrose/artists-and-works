@@ -75,7 +75,6 @@ export default function ArtWorksTable() {
               >
                 <CardActionArea>
                   <img
-                    onClick={() => show_artists_modal(item.fields)}
                     key={index}
                     src={`${item.fields["Attachments"][0].url}?w=350&fit=crop&auto=format`}
                     srcSet={`${item.fields["Attachments"][0].url}?w=350&fit=crop&auto=format&dpr=2 2x`}
